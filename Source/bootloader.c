@@ -52,7 +52,10 @@
 #include "log.h"
 #include <stdbool.h>
 #include "prj_config.h"
-#define APP_START_ADDRESS 0x00019000
+
+#include "SEGGER_RTT.h"
+#include <hal/nrf_clock.h>
+#define APP_START_ADDRESS 0x0000b000
 #define BOOTLOADER_DFU_GPREGRET_MASK            (0xF8)      /**< Mask for GPGPREGRET bits used for the magic pattern written to GPREGRET register to signal between main app and DFU. */
 #define BOOTLOADER_DFU_GPREGRET                 (0xB0)      /**< Magic pattern written to GPREGRET register to signal between main app and DFU. The 3 lower bits are assumed to be used for signalling purposes.*/
 #define BOOTLOADER_DFU_START_BIT_MASK           (0x01)      /**< Bit mask to signal from main application to enter DFU mode using a buttonless service. */
@@ -101,54 +104,60 @@ bool ble_dfu_enter_check(void)
     return false;
 }
 
-/**@brief Jumps to an address with a new Main Stack Pointer (MSP).
- *
- * @param[in] new_msp  The new value for MSP.
- * @param[in] addr     The address to jump to (must be Thumb function).
- */
-__STATIC_INLINE void jump_to_addr(uint32_t new_msp, uint32_t addr)
+
+
+
+void cleanup_arm_nvic(void) {
+	/* Allow any pending interrupts to be recognized */
+	__ISB();
+	__disable_irq();
+
+	/* Disable NVIC interrupts */
+	for (uint8_t i = 0; i < ARRAY_SIZE(NVIC->ICER); i++) {
+		NVIC->ICER[i] = 0xFFFFFFFF;
+	}
+	/* Clear pending NVIC interrupts */
+	for (uint8_t i = 0; i < ARRAY_SIZE(NVIC->ICPR); i++) {
+		NVIC->ICPR[i] = 0xFFFFFFFF;
+	}
+}	
+static void nrf_cleanup_clock(void)
 {
-    __set_MSP(new_msp);
-    ((void (*)(void))(addr & ~1UL))(); // Clear Thumb bit for safety
+    nrf_clock_int_disable(NRF_CLOCK, 0xFFFFFFFF);
 }
 
-/**@brief Function for booting an app as if the chip was reset.
- *
- * @param[in] vector_table_addr  The address of the app's vector table.
- */
-__STATIC_INLINE void app_start(uint32_t vector_table_addr)
+
+struct arm_vector_table {
+    uint32_t msp;
+    uint32_t reset;
+};
+
+__STATIC_INLINE void jump_to_app(uint32_t vector_table_addr)
 {
-    const uint32_t current_isr_num = (__get_IPSR() & IPSR_ISR_Msk);
-    
-    // Read MSP and Reset Handler from vector table
-    const uint32_t new_msp       = *((uint32_t *)(vector_table_addr));
-    const uint32_t reset_handler = *((uint32_t *)(vector_table_addr + sizeof(uint32_t)));
 
-    // Ensure we are not in an ISR
-    // ASSERT(current_isr_num == 0); // Enable if you have ASSERT enabled
+    static struct arm_vector_table *vt;
+        vt = (struct arm_vector_table *)(vector_table_addr);
+    SEGGER_RTT_printf(0,"vector_table_addr 0x%x MSP=0x%x, Reset_Handler=0x%x\r\n", vector_table_addr,vt->msp, vt->reset);
 
-    if (current_isr_num != 0) {
-        // Handle error: cannot jump from ISR
-        while (1); 
-    }
 
-    // Reset special registers to their power-on state
-    __set_CONTROL(0x00000000);   // Privileged, MSP, no secure FP access
-    __set_PRIMASK(0x00000000);
-    __set_BASEPRI(0x00000000);
-    __set_FAULTMASK(0x00000000);
+    nrf_cleanup_clock();
 
-    // Optional but recommended: set Vector Table Offset Register
-    SCB->VTOR = vector_table_addr;
-LOG_INF("bf jump_to_addr\r\n");
-    // Jump to application
-    jump_to_addr(new_msp, reset_handler);
+    __set_PSPLIM(0);
+    __set_MSPLIM(0);
+
+
+    __set_CONTROL(0x00); /* application will configures core on its own */
+    __ISB();
+
+    __set_MSP(vt->msp);
+
+    ((void (*)(void))vt->reset)();
 }
-static int co;
+
 void bootloader_start(void)
 {
     int err;
-    const uint32_t app_addr = APP_START_ADDRESS;
+    const uint32_t app_vector_table = APP_START_ADDRESS;
     bool dfu_enter_check = false;
 #if 0
     err = nrf_sdh_enable_request();
@@ -170,7 +179,7 @@ void bootloader_start(void)
 //dfu_enter_check =ble_dfu_enter_check();
   if(dfu_enter_check)
   {
-      LOG_INF("Bootloader: enter dfu mode \r\n", app_addr);
+      LOG_INF("Bootloader: enter dfu mode \r\n", app_vector_table);
   }
   else
   {
@@ -181,10 +190,12 @@ void bootloader_start(void)
 		return;
 	}
 #endif
-       ++co;
-       LOG_INF("Bootloader: Attempting to start application at 0x%x %d\r\n", app_addr,co);
-           // 执行跳转
-    app_start(app_addr);
+    LOG_INF("start application at 0x%x\r\n", app_vector_table);
+
+    jump_to_app(app_vector_table);
+
+    while (1); // 不应该到这里
+
   }
 
 }

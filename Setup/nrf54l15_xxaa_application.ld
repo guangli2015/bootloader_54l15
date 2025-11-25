@@ -5,8 +5,8 @@ GROUP(-lgcc -lc) */
 
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x19000 /* Inside global RRAM0 */
-  RAM (rwx) : ORIGIN = 0x20002468, LENGTH = 0x3B800
+  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x9000 /* Inside global RRAM0 */
+  RAM (rwx) : ORIGIN = 0x20004400, LENGTH = 0x3B800
 }
 
 

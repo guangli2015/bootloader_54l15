@@ -5,7 +5,6 @@
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x1b9b0" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0xceba" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="89" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="Source/softdevice_handler/irq_forward.s" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="175" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="Source/main.c" useHWbreakpoint="false"/>
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault;SecureFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -63,19 +62,19 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="174" useTextEdit="1" path="Source/main.c" left="0" top="141" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="104" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="51" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="38" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="315" useTextEdit="1" path="Source/main.c" left="0" selected="1" top="311" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="104" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="11" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="10" y="48" useTextEdit="1" path="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" left="0" top="24" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="43" useTextEdit="1" path="Source/nrfx_config_nrf54l15_application.h" left="0" top="15" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="57" useTextEdit="1" path="Source/prj_config.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="51" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="57" useTextEdit="1" path="Source/prj_config.h" left="0" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="54" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="596" useTextEdit="1" path="Source/nrfx/haly/nrfy_uarte.h" left="0" top="569" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="720" useTextEdit="1" path="Source/nrfx/drivers/src/nrfx_uarte.c" left="0" top="690" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="10" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="57" y="75" useTextEdit="1" path="Source/bootloader.c" left="0" selected="1" top="37" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="703" useTextEdit="1" path="Source/cmsis/include/cmsis_gcc.h" left="0" top="671" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="2" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="57" y="75" useTextEdit="1" path="Source/bootloader.c" left="0" top="45" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="703" useTextEdit="1" path="Source/cmsis/include/cmsis_gcc.h" left="0" top="672" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/rtt" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

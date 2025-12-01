@@ -55,6 +55,11 @@
 
 #include "SEGGER_RTT.h"
 #include <hal/nrf_clock.h>
+#include "app_scheduler.h"
+#include "nrf_dfu.h"
+#define SCHED_QUEUE_SIZE      32          /**< Maximum number of events in the scheduler queue. */
+#define SCHED_EVENT_DATA_SIZE NRF_DFU_SCHED_EVENT_DATA_SIZE /**< Maximum app_scheduler event size. */
+
 #define APP_START_ADDRESS 0x0000b000
 #define BOOTLOADER_DFU_GPREGRET_MASK            (0xF8)      /**< Mask for GPGPREGRET bits used for the magic pattern written to GPREGRET register to signal between main app and DFU. */
 #define BOOTLOADER_DFU_GPREGRET                 (0xB0)      /**< Magic pattern written to GPREGRET register to signal between main app and DFU. The 3 lower bits are assumed to be used for signalling purposes.*/
@@ -80,6 +85,16 @@ do                                                      \
     }                                                   \
 } while(0)
 
+
+static void on_error(void)
+{
+    NVIC_SystemReset();
+}
+void app_error_handler_bare(uint32_t error_code)
+{
+    LOG_INF("Received an error: 0x%08x!", error_code);
+    on_error();
+}
 bool ble_dfu_enter_check(void)
 {
     uint32_t err_code;
@@ -153,7 +168,12 @@ __STATIC_INLINE void jump_to_app(uint32_t vector_table_addr)
 
     ((void (*)(void))vt->reset)();
 }
-
+/**@brief Function for initializing the event scheduler.
+ */
+static void scheduler_init(void)
+{
+    APP_SCHED_INIT(SCHED_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
+}
 void bootloader_start(void)
 {
     int err;
@@ -180,6 +200,7 @@ void bootloader_start(void)
   if(dfu_enter_check)
   {
       LOG_INF("Bootloader: enter dfu mode \r\n", app_vector_table);
+      scheduler_init();
   }
   else
   {

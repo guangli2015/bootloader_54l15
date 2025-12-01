@@ -4,7 +4,6 @@
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x1b9b0" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0xceba" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="89" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="Source/softdevice_handler/irq_forward.s" useHWbreakpoint="false"/>
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault;SecureFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -26,7 +25,10 @@
  <Project>
   <ProjectSessionItem path="bootloader_54l15"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_adv"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_conn_params"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;NRF_DFU"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;scheduler"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Setup"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;softdevice_handler"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Source"/>
@@ -62,19 +64,53 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="315" useTextEdit="1" path="Source/main.c" left="0" selected="1" top="311" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="104" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="81" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="11" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="48" useTextEdit="1" path="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" left="0" top="24" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="43" useTextEdit="1" path="Source/nrfx_config_nrf54l15_application.h" left="0" top="15" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="57" useTextEdit="1" path="Source/prj_config.h" left="0" top="26" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="54" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="596" useTextEdit="1" path="Source/nrfx/haly/nrfy_uarte.h" left="0" top="569" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="720" useTextEdit="1" path="Source/nrfx/drivers/src/nrfx_uarte.c" left="0" top="690" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="36" useTextEdit="1" path="Source/main.c" left="0" top="9" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="1" y="101" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="73" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="10" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="48" useTextEdit="1" path="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" left="0" top="25" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx_config_nrf54l15_application.h" left="0" top="177" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="14" useTextEdit="1" path="Source/prj_config.h" left="0" top="2" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="25" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="596" useTextEdit="1" path="Source/nrfx/haly/nrfy_uarte.h" left="0" top="573" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="720" useTextEdit="1" path="Source/nrfx/drivers/src/nrfx_uarte.c" left="0" top="698" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="10" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="2" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="57" y="75" useTextEdit="1" path="Source/bootloader.c" left="0" top="45" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="703" useTextEdit="1" path="Source/cmsis/include/cmsis_gcc.h" left="0" top="672" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="11" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="48" useTextEdit="1" path="Source/bootloader.c" left="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="703" useTextEdit="1" path="Source/cmsis/include/cmsis_gcc.h" left="0" top="681" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="13" useTextEdit="1" path="Source/ble_adv/ble_adv.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="110" useTextEdit="1" path="Source/scheduler/app_scheduler.h" left="0" top="77" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="6" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="33" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_ble.c" left="0" top="33" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_soc.c" left="0" top="71" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="68" y="279" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="253" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="47" useTextEdit="1" path="Source/scheduler/app_scheduler.c" left="0" top="22" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="47" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="37" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="51" useTextEdit="1" path="Source/dfu/nrf_dfu_flash.h" left="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="33" useTextEdit="1" path="Source/nrfx/drivers/src/nrfx_clock.c" left="0" top="9" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/helpers/nrfx_flag32_allocator.c" left="0" top="38" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/rtt/SEGGER_RTT.c" left="0" top="246" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/rtt/SEGGER_RTT_printf.c" left="0" top="447" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/mdk/system_nrf54l.c" left="0" top="182" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="12" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="10" useTextEdit="1" path="Source/ble_adv/ble_adv_data.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/err_num.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx_glue.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="185" useTextEdit="1" path="Source/nrfx/drivers/src/nrfx_grtc.c" left="0" top="153" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="61" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="32" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="52" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_soc.h" left="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_utils.h" left="0" top="3" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="87" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="136" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" top="112" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="107" useTextEdit="1" path="Source/dfu/nrf_dfu_transport.h" left="0" top="82" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="68" y="136" useTextEdit="1" path="Source/FreeRTOSConfig.h" left="2" top="114" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/mdk/nrf54l15_application.h" left="0" selected="1" top="286" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="36" useTextEdit="1" path="Source/nrfx/drivers/include/nrfx_uarte.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="37" useTextEdit="1" path="Source/nrfx/nrfx.h" left="0" top="12" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="74" useTextEdit="1" path="Source/nrfx_config.h" left="0" top="42" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="42" useTextEdit="1" path="Source/nrfx/drivers/nrfx_common.h" left="0" top="18" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="246" useTextEdit="1" path="Source/nrfx/mdk/nrf.h" left="0" top="221" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="44" useTextEdit="1" path="Source/nrfx/mdk/nrf54l15.h" left="0" top="8" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/rtt" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/ble_dfu" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

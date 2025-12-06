@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 - 2021, Nordic Semiconductor ASA
+ * Copyright (c) 2016 - 2021, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -38,24 +38,21 @@
  *
  */
 
-#include "nrf_dfu_handling_error.h"
 
-#include "log.h"
-#include "nrf_dfu_req_handler.h"
 
-static nrf_dfu_ext_error_code_t m_last_error = NRF_DFU_EXT_ERROR_NO_ERROR;
+#include "nrf_fstorage.h"
 
-nrf_dfu_result_t ext_error_set(nrf_dfu_ext_error_code_t error_code)
+#include <stdbool.h>
+
+
+
+
+
+bool nrf_fstorage_is_busy(void const * p_fs)
 {
-    m_last_error = error_code;
-
-    return NRF_DFU_RES_CODE_EXT_ERROR;
+    return false;
 }
 
-nrf_dfu_ext_error_code_t ext_error_get()
-{
-    nrf_dfu_ext_error_code_t last_error = m_last_error;
-    m_last_error = NRF_DFU_EXT_ERROR_NO_ERROR;
 
-    return last_error;
-}
+
+

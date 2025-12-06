@@ -41,7 +41,7 @@
 
 #include <stddef.h>
 
-#include "nrf_dfu_transport.h"
+//#include "nrf_dfu_transport.h"
 #include "nrf_dfu_types.h"
 #include "nrf_dfu_req_handler.h"
 #include "nrf_dfu_handling_error.h"
@@ -57,17 +57,50 @@
 //#include "nrf_delay.h"
 //#include "nrf_dfu_settings.h"
 #include "nrf_dfu_ble.h"
-
+#include "nrf_balloc.h"
 
 #include "log.h"
+#include <string.h>
+#include "prj_config.h"
+
+#define NRF_DFU_BLE_ADV_NAME "DfuTarg"
+#define APP_ERROR_CHECK(ERR_CODE)                           \
+    do                                                      \
+    {                                                       \
+        const uint32_t LOCAL_ERR_CODE = (ERR_CODE);         \
+        if (LOCAL_ERR_CODE != NRF_SUCCESS)                  \
+        {                                                   \
+            NVIC_SystemReset();             \
+        }                                                   \
+    } while (0)
+
+#define NRF_LOG_DEBUG LOG_INF
+#define NRF_LOG_ERROR LOG_INF
+
+
+#define BLE_CCCD_VALUE_LEN                                       2 
+#define VERIFY_SUCCESS(statement)                       \
+do                                                      \
+{                                                       \
+    uint32_t _err_code = (uint32_t) (statement);        \
+    if (_err_code != NRF_SUCCESS)                       \
+    {                                                   \
+        return _err_code;                               \
+    }                                                   \
+} while(0)
 #define NRF_SDH_BLE_GATT_MAX_MTU_SIZE 247
 #define NRF_DFU_BLE_MIN_CONN_INTERVAL 12
 #define NRF_DFU_BLE_MAX_CONN_INTERVAL 12
 #define NRF_DFU_BLE_CONN_SUP_TIMEOUT_MS 6000
+#define ALIGN_NUM(alignment, number) (((number) - 1) + (alignment) - (((number) - 1) % (alignment)))
+
+
+
+
 
 #ifndef NRF_DFU_BLE_ADV_INTERVAL
 #define NRF_DFU_BLE_ADV_INTERVAL 40 /* 40 * 0,625ms = 25ms */
-#warning "sdk_config.h is not up to date."
+
 #endif
 
 #define APP_BLE_CONN_CFG_TAG                1                                                       /**< A tag identifying the SoftDevice BLE configuration. */
@@ -89,9 +122,9 @@
 
 #if (NRF_DFU_BLE_BUFFERS_OVERRIDE)
 /* If selected, use the override value. */
-#define MAX_DFU_BUFFERS     NRF_DFU_BLE_BUFFERS
+#define MAX_DFU_BUFFERS     NRF_DFU_BLE_BUFsFERS
 #else
-#define MAX_DFU_BUFFERS     ((CODE_PAGE_SIZE / MAX_DFU_PKT_LEN) + 1)
+#define MAX_DFU_BUFFERS     (((sizeof(uint32_t)*1024) / MAX_DFU_PKT_LEN) + 1)
 #endif
 
 #if (NRF_DFU_BLE_REQUIRES_BONDS) && (!NRF_SDH_BLE_SERVICE_CHANGED)
@@ -105,11 +138,11 @@
 #endif
 
 
-DFU_TRANSPORT_REGISTER(nrf_dfu_transport_t const ble_dfu_transport) =
-{
-    .init_func  = ble_dfu_transport_init,
-    .close_func = ble_dfu_transport_close,
-};
+//DFU_TRANSPORT_REGISTER(nrf_dfu_transport_t const ble_dfu_transport) =
+//{
+//    .init_func  = ble_dfu_transport_init,
+//    .close_func = ble_dfu_transport_close,
+//};
 
 #if (NRF_DFU_BLE_REQUIRES_BONDS)
 static nrf_dfu_peer_data_t m_peer_data;
@@ -135,8 +168,32 @@ static ble_gap_conn_params_t const m_gap_conn_params =
 };
 
 NRF_BALLOC_DEF(m_buffer_pool, MAX_DFU_PKT_LEN, MAX_DFU_BUFFERS);
+static __INLINE uint32_t uint32_decode(const uint8_t * p_encoded_data)
+{
+    return ( (((uint32_t)((uint8_t *)p_encoded_data)[0]) << 0)  |
+             (((uint32_t)((uint8_t *)p_encoded_data)[1]) << 8)  |
+             (((uint32_t)((uint8_t *)p_encoded_data)[2]) << 16) |
+             (((uint32_t)((uint8_t *)p_encoded_data)[3]) << 24 ));
+}
 
-
+static __INLINE uint8_t uint32_encode(uint32_t value, uint8_t * p_encoded_data)
+{
+    p_encoded_data[0] = (uint8_t) ((value & 0x000000FF) >> 0);
+    p_encoded_data[1] = (uint8_t) ((value & 0x0000FF00) >> 8);
+    p_encoded_data[2] = (uint8_t) ((value & 0x00FF0000) >> 16);
+    p_encoded_data[3] = (uint8_t) ((value & 0xFF000000) >> 24);
+    return sizeof(uint32_t);
+}
+static __INLINE uint16_t uint16_decode(const uint8_t * p_encoded_data)
+{
+        return ( (((uint16_t)((uint8_t *)p_encoded_data)[0])) |
+                 (((uint16_t)((uint8_t *)p_encoded_data)[1]) << 8 ));
+}
+bool ble_srv_is_notification_enabled(uint8_t const * p_encoded_data)
+{
+    uint16_t cccd_value = uint16_decode(p_encoded_data);
+    return ((cccd_value & BLE_GATT_HVX_NOTIFICATION) != 0);
+}
 /**@brief     Function for the Advertising functionality initialization.
  *
  * @details   Encodes the required advertising data and passes it to the stack.
@@ -204,7 +261,7 @@ static uint32_t advertising_start(void)
         .primary_phy     = BLE_GAP_PHY_1MBPS,
     };
 
-    NRF_LOG_DEBUG("Advertising...");
+    LOG_INF("Advertising...");
 
 #if (NRF_DFU_BLE_REQUIRES_BONDS)
     ble_gap_irk_t empty_irk = {{0}};
@@ -415,7 +472,7 @@ static void ble_dfu_req_handler_callback(nrf_dfu_response_t * p_res, void * p_co
 
     if (p_res->result != NRF_DFU_RES_CODE_SUCCESS)
     {
-        NRF_LOG_WARNING("DFU request %d failed with error: 0x%x", p_res->request, p_res->result);
+        LOG_INF("DFU request %d failed with error: 0x%x", p_res->request, p_res->result);
 
         if (p_res->result == NRF_DFU_RES_CODE_EXT_ERROR)
         {
@@ -496,13 +553,14 @@ static uint32_t on_ctrl_pt_write(ble_dfu_t * p_dfu, ble_gatts_evt_write_t const 
             if (request.create.object_type == NRF_DFU_OBJ_TYPE_COMMAND)
             {
                 /* Activity on the current transport. Close all except the current one. */
-                (void) nrf_dfu_transports_close(&ble_dfu_transport);
+                //(void) nrf_dfu_transports_close(&ble_dfu_transport);
+                ble_dfu_transport_close(false);
             }
         } break;
 
         case NRF_DFU_OP_RECEIPT_NOTIF_SET:
         {
-            NRF_LOG_DEBUG("Set receipt notif");
+            LOG_INF("Set receipt notif");
 
             m_pkt_notif_target     = uint16_decode(&(p_ble_write_evt->data[1]));
             m_pkt_notif_target_cnt = m_pkt_notif_target;
@@ -570,7 +628,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
 
 static void on_flash_write(void * p_buf)
 {
-    NRF_LOG_DEBUG("Freeing buffer %p", p_buf);
+    LOG_INF("Freeing buffer %p", p_buf);
     nrf_balloc_free(&m_buffer_pool, p_buf);
 }
 
@@ -594,11 +652,11 @@ static void on_write(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
     if (p_balloc_buf == NULL)
     {
         /* Operations are retried by the host; do not give up here. */
-        NRF_LOG_WARNING("cannot allocate memory buffer!");
+        LOG_INF("cannot allocate memory buffer!");
         return;
     }
 
-    NRF_LOG_DEBUG("Buffer %p acquired, len %d (%d)",
+    LOG_INF("Buffer %p acquired, len %d (%d)",
                   p_balloc_buf, p_write_evt->len, MAX_DFU_PKT_LEN);
 
     /* Copy payload into buffer. */
@@ -645,7 +703,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
         {
-            NRF_LOG_DEBUG("Connected");
+            LOG_INF("Connected");
 
             m_conn_handle = p_gap->conn_handle;
 
@@ -657,7 +715,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             err_code = sd_ble_gap_conn_param_update(m_conn_handle, &m_gap_conn_params);
             if (err_code != NRF_SUCCESS)
             {
-                NRF_LOG_ERROR("Failure to update connection parameters: 0x%x", err_code);
+                LOG_INF("Failure to update connection parameters: 0x%x", err_code);
             }
         } break;
 
@@ -783,7 +841,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             NRF_LOG_DEBUG("conn_sup_timeout: %d",  p_conn->conn_sup_timeout);
         } break;
 
-#if !defined(S112) && !defined(S113)
+#if 0
         case BLE_GAP_EVT_CONN_PARAM_UPDATE_REQUEST:
         {
             NRF_LOG_DEBUG("Received BLE_GAP_EVT_CONN_PARAM_UPDATE_REQUEST");
@@ -936,13 +994,13 @@ static uint32_t gap_params_init(void)
     err_code = gap_address_change();
     VERIFY_SUCCESS(err_code);
 
-    if ((m_flags & DFU_BLE_FLAG_USE_ADV_NAME) != 0)
-    {
-        NRF_LOG_DEBUG("Setting adv name: %s, length: %d", m_adv_name.name, m_adv_name.len);
-        device_name = m_adv_name.name;
-        name_len    = m_adv_name.len;
-    }
-    else
+    //if ((m_flags & DFU_BLE_FLAG_USE_ADV_NAME) != 0)
+    //{
+    //    NRF_LOG_DEBUG("Setting adv name: %s, length: %d", m_adv_name.name, m_adv_name.len);
+    //    device_name = m_adv_name.name;
+    //    name_len    = m_adv_name.len;
+    //}
+    //else
 #endif
     {
         NRF_LOG_DEBUG("Using default advertising name");
@@ -957,24 +1015,24 @@ static uint32_t gap_params_init(void)
     return err_code;
 }
 
-
+NRF_SDH_BLE_OBSERVER(m_ble_evt_observer, ble_evt_handler, NULL, BLE_OBSERVER_PRIO);
 static uint32_t ble_stack_init()
 {
     ret_code_t err_code;
     uint32_t   ram_start = 0;
-
+    int err;
     /* Register as a BLE event observer to receive BLE events. */
-    NRF_SDH_BLE_OBSERVER(m_ble_evt_observer, BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
+    //NRF_SDH_BLE_OBSERVER(m_ble_evt_observer, ble_evt_handler, NULL,BLE_OBSERVER_PRIO);
 
-#if (!defined(NRF_DFU_BLE_SKIP_SD_INIT)) || (NRF_DFU_BLE_SKIP_SD_INIT == 0)
-    err_code = nrf_dfu_mbr_init_sd();
-    VERIFY_SUCCESS(err_code);
+//#if (!defined(NRF_DFU_BLE_SKIP_SD_INIT)) || (NRF_DFU_BLE_SKIP_SD_INIT == 0)
+//    err_code = nrf_dfu_mbr_init_sd();
+//    VERIFY_SUCCESS(err_code);
 
-    NRF_LOG_DEBUG("Setting up vector table: 0x%08x", BOOTLOADER_START_ADDR);
-    err_code = sd_softdevice_vector_table_base_set(BOOTLOADER_START_ADDR);
-    VERIFY_SUCCESS(err_code);
-#endif
-
+//    NRF_LOG_DEBUG("Setting up vector table: 0x%08x", BOOTLOADER_START_ADDR);
+//    err_code = sd_softdevice_vector_table_base_set(BOOTLOADER_START_ADDR);
+//    VERIFY_SUCCESS(err_code);
+//#endif
+#if 0
     NRF_LOG_DEBUG("Enabling SoftDevice.");
     err_code = nrf_sdh_enable_request();
     VERIFY_SUCCESS(err_code);
@@ -990,6 +1048,28 @@ static uint32_t ble_stack_init()
     /* Enable the BLE stack. */
     NRF_LOG_DEBUG("Enabling the BLE stack.");
     return nrf_sdh_ble_enable(&ram_start);
+#endif
+    	LOG_INF("BLE buttonless dfu sample started\r\n");
+
+	err = nrf_sdh_enable_request();
+	if (err) {
+		LOG_INF("Failed to enable SoftDevice, err %d", err);
+		goto idle;
+	}
+
+	LOG_INF("SoftDevice enabled\r\n");
+
+	err = nrf_sdh_ble_enable(CONFIG_NRF_SDH_BLE_CONN_TAG);
+	if (err) {
+		LOG_INF("Failed to enable BLE, err %d", err);
+		goto idle;
+	}
+
+	LOG_INF("Bluetooth enabled\r\n");
+        return 0;
+idle:
+
+	return -1;
 }
 
 
@@ -1157,7 +1237,7 @@ uint32_t ble_dfu_transport_init(nrf_dfu_observer_t observer)
     err_code = ble_stack_init();
     VERIFY_SUCCESS(err_code);
 
-#if (NRF_DFU_BLE_REQUIRES_BONDS)
+#if (0)
     /* Copy out the peer data if bonds are required */
     if (nrf_dfu_settings_peer_data_is_valid())
     {
@@ -1170,7 +1250,7 @@ uint32_t ble_dfu_transport_init(nrf_dfu_observer_t observer)
     {
         APP_ERROR_HANDLER(NRF_ERROR_INTERNAL);
     }
-#else
+//#else
     /* Copy out the new advertisement name when bonds are not required and the name is set. */
     if (nrf_dfu_settings_adv_name_is_valid())
     {
@@ -1204,11 +1284,15 @@ uint32_t ble_dfu_transport_init(nrf_dfu_observer_t observer)
 }
 
 
-uint32_t ble_dfu_transport_close(nrf_dfu_transport_t const * p_exception)
+
+
+
+uint32_t ble_dfu_transport_close(bool p_exception)
 {
     uint32_t err_code = NRF_SUCCESS;
 
-    if ((m_flags & DFU_BLE_FLAG_INITIALIZED) && (p_exception != &ble_dfu_transport))
+    //if ((m_flags & DFU_BLE_FLAG_INITIALIZED) && (p_exception != &ble_dfu_transport))
+    if ((m_flags & DFU_BLE_FLAG_INITIALIZED) && (p_exception == true))
     {
         NRF_LOG_DEBUG("Shutting down BLE transport.");
 
@@ -1224,7 +1308,12 @@ uint32_t ble_dfu_transport_close(nrf_dfu_transport_t const * p_exception)
             VERIFY_SUCCESS(err_code);
 
             /* Wait a bit for the disconnect event to be sent on air. */
-            nrf_delay_ms(200);
+            //nrf_delay_ms(200);
+              volatile uint32_t i = 0;
+              for (i = 0; i < 3200000; i++)  // 实测值：128MHz, -O2, nRF54L15
+              {
+                  __NOP();
+              }
         }
         else
         {

@@ -38,17 +38,18 @@
  *
  */
 #include "nrf_dfu_transport.h"
-#include "nrf_log.h"
+#include "log.h"
+#include "nrf_error.h"
+#include "nrf_dfu_ble.h"
+//#define DFU_TRANS_SECTION_ITEM_GET(i)       NRF_SECTION_ITEM_GET(dfu_trans, nrf_dfu_transport_t, (i))
+//#define DFU_TRANS_SECTION_ITEM_COUNT        NRF_SECTION_ITEM_COUNT(dfu_trans, nrf_dfu_transport_t)
 
-
-#define DFU_TRANS_SECTION_ITEM_GET(i)       NRF_SECTION_ITEM_GET(dfu_trans, nrf_dfu_transport_t, (i))
-#define DFU_TRANS_SECTION_ITEM_COUNT        NRF_SECTION_ITEM_COUNT(dfu_trans, nrf_dfu_transport_t)
-
-NRF_SECTION_DEF(dfu_trans, const nrf_dfu_transport_t);
+//NRF_SECTION_DEF(dfu_trans, const nrf_dfu_transport_t);
 
 
 uint32_t nrf_dfu_transports_init(nrf_dfu_observer_t observer)
 {
+#if 0
     uint32_t const num_transports = DFU_TRANS_SECTION_ITEM_COUNT;
     uint32_t ret_val = NRF_SUCCESS;
 
@@ -64,13 +65,21 @@ uint32_t nrf_dfu_transports_init(nrf_dfu_observer_t observer)
             break;
         }
     }
-
+#endif
+    uint32_t ret_val = NRF_SUCCESS;
+    ble_dfu_transport_init(observer);
+    if (ret_val != NRF_SUCCESS)
+    {
+            LOG_INF("Failed to initialize transport %d, error %d", i, ret_val);
+           
+    }  
     return ret_val;
 }
 
 
 uint32_t nrf_dfu_transports_close(nrf_dfu_transport_t const * p_exception)
 {
+#if 0
     uint32_t const num_transports = DFU_TRANS_SECTION_ITEM_COUNT;
     uint32_t ret_val = NRF_SUCCESS;
 
@@ -86,6 +95,13 @@ uint32_t nrf_dfu_transports_close(nrf_dfu_transport_t const * p_exception)
             break;
         }
     }
-
+#endif
+    uint32_t ret_val = NRF_SUCCESS;
+    ble_dfu_transport_close(p_exception);
+    if (ret_val != NRF_SUCCESS)
+    {
+            LOG_INF("Failed to initialize transport %d, error %d", i, ret_val);
+           
+    }
     return ret_val;
 }

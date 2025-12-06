@@ -40,10 +40,11 @@
 #include "nrf_dfu.h"
 
 #include "nrf_dfu_utils.h"
-#include "nrf_dfu_transport.h"
+#include "nrf_dfu_ble.h"
 #include "nrf_dfu_req_handler.h"
 #include "log.h"
 #include "nrf_error.h"
+#include "nrf_dfu_types.h"
 static nrf_dfu_observer_t m_user_observer;                          //<! Observer callback set by the user.
 
 
@@ -58,7 +59,7 @@ static void dfu_observer(nrf_dfu_evt_type_t event)
         case NRF_DFU_EVT_DFU_COMPLETED:
         case NRF_DFU_EVT_DFU_ABORTED:
 #ifndef NRF_DFU_NO_TRANSPORT
-            UNUSED_RETURN_VALUE(nrf_dfu_transports_close(NULL));
+           ble_dfu_transport_close(true);
 #endif
             break;
         default:
@@ -85,7 +86,7 @@ uint32_t nrf_dfu_init(nrf_dfu_observer_t observer)
     dfu_observer(NRF_DFU_EVT_DFU_INITIALIZED);
 
     // Initializing transports
-    ret_val = nrf_dfu_transports_init(dfu_observer);
+    ret_val = ble_dfu_transport_init(dfu_observer);
     if (ret_val != NRF_SUCCESS)
     {
         LOG_INF("Could not initalize DFU transport: 0x%08x", ret_val);

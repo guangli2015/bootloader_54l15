@@ -50,8 +50,8 @@
 #include <stdint.h>
 #include "nrf_dfu_types.h"
 #include "nrf_dfu_flash.h"
-#include "sdk_config.h"
-#include "sdk_errors.h"
+
+#include "nrf_error.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 - 2021, Nordic Semiconductor ASA
+ * Copyright (c) 2016 - 2021, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -37,25 +37,53 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef NRF_FSTORAGE_H__
+#define NRF_FSTORAGE_H__
 
-#include "nrf_dfu_handling_error.h"
+/**
+ * @file
+ *
+ * @defgroup nrf_fstorage Flash storage (fstorage)
+ * @ingroup app_common
+ * @{
+ *
+ * @brief   Flash abstraction library that provides basic read, write, and erase operations.
+ *
+ * @details The fstorage library can be implemented in different ways. Two implementations are provided:
+ * - The @ref nrf_fstorage_sd implements flash access through the SoftDevice.
+ * - The @ref nrf_fstorage_nvmc implements flash access through the non-volatile memory controller.
+ *
+ * You can select the implementation that should be used independently for each instance of fstorage.
+ */
 
-#include "log.h"
-#include "nrf_dfu_req_handler.h"
+#include <stdint.h>
+#include <stdbool.h>
 
-static nrf_dfu_ext_error_code_t m_last_error = NRF_DFU_EXT_ERROR_NO_ERROR;
 
-nrf_dfu_result_t ext_error_set(nrf_dfu_ext_error_code_t error_code)
-{
-    m_last_error = error_code;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-    return NRF_DFU_RES_CODE_EXT_ERROR;
+
+
+
+
+/**@brief   Function for querying the status of fstorage.
+ *
+ * @details An uninitialized instance of fstorage is treated as not busy.
+ *
+ * @param[in]   p_fs    The fstorage instance. Pass NULL to query all instances.
+ *
+ * @returns If @p p_fs is @c NULL, this function returns true if any fstorage instance is busy or false otherwise.
+ * @returns If @p p_fs is not @c NULL, this function returns true if the fstorage instance is busy or false otherwise.
+ */
+ bool nrf_fstorage_is_busy(void const * p_fs);
+
+/** @} */
+
+
+#ifdef __cplusplus
 }
+#endif
 
-nrf_dfu_ext_error_code_t ext_error_get()
-{
-    nrf_dfu_ext_error_code_t last_error = m_last_error;
-    m_last_error = NRF_DFU_EXT_ERROR_NO_ERROR;
-
-    return last_error;
-}
+#endif // NRF_FSTORAGE_H__

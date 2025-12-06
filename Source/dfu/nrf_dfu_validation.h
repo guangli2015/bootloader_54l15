@@ -48,8 +48,7 @@
 #define __NRF_DFU_VALIDATION_H
 
 #include "stdint.h"
-#include "sdk_errors.h"
-#include "dfu-cc.pb.h"
+
 #include "nrf_dfu_handling_error.h"
 
 /**
@@ -157,42 +156,8 @@ nrf_dfu_result_t nrf_dfu_validation_post_data_execute(uint32_t data_addr, uint32
  */
 nrf_dfu_result_t nrf_dfu_validation_activation_prepare(uint32_t data_addr, uint32_t data_len);
 
-/**
- * @brief Function to execute on a validated external app.
- *
- * @details This function is called once all data is received with the parameter
- *          @p is_boot set to false. The function is called during bootup with the parameter
- *          set to true.
- *
- *
- *
- * @note This function requires that @ref NRF_DFU_SUPPORTS_EXTERNAL_APP is set to 1.
- *       It is up to the user to implement this function.
- *
- * @warning Parameter @p is_trusted must be used to ensure that no loss of security of process can happen.
- *          This parameter should only be set if the function is called after a root-of-trust
- *          reset on the device.
- *
- *          Parameter @p is_trusted can be used for the following:
- *          - Ensuring that an external application is run only once (after root-of-trust).
- *          - Ensuring that a bank flag or any other flash access can only happen after root-of-trust.
- *          - Ensuring that the device reaches the correct state after a power failure on the device.
- *
- * @param[in] p_init        Init command for the firmware upgrade.
- * @param[in] is_trusted    Must be set to true if this is called after root-of-trust boot.
- *                          Must be set to false if this is called from DFU mode or background
- *                          DFU operation.
- *
- * @return      Operation result. see @ref nrf_dfu_result_t.
- */
-nrf_dfu_result_t nrf_dfu_validation_post_external_app_execute(dfu_init_command_t const * p_init, bool is_trusted);
 
-/**
-* @brief Function to check if there is a valid external app in Bank 1.
-*
-* @returns True if valid external app, otherwise false.
-*/
-bool nrf_dfu_validation_valid_external_app(void);
+
 
 #endif //__NRF_DFU_VALIDATION_H
 

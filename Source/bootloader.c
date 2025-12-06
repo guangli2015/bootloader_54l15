@@ -174,11 +174,37 @@ static void scheduler_init(void)
 {
     APP_SCHED_INIT(SCHED_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 }
+
+/**@brief Function for handling DFU events.
+ */
+static void dfu_observer(nrf_dfu_evt_type_t evt_type)
+{
+    switch (evt_type)
+    {
+        case NRF_DFU_EVT_DFU_STARTED:
+        case NRF_DFU_EVT_OBJECT_RECEIVED:
+               LOG_INF("NRF_DFU_EVT_DFU_STARTED/NRF_DFU_EVT_OBJECT_RECEIVED \r\n");
+            break;
+        case NRF_DFU_EVT_DFU_COMPLETED:
+        case NRF_DFU_EVT_DFU_ABORTED:
+            LOG_INF("NRF_DFU_EVT_DFU_COMPLETED/NRF_DFU_EVT_DFU_ABORTED \r\n");
+            NVIC_SystemReset();
+            break;
+        case NRF_DFU_EVT_TRANSPORT_DEACTIVATED:
+                LOG_INF("NRF_DFU_EVT_TRANSPORT_DEACTIVATED \r\n");
+            break;
+        default:
+            break;
+    }
+
+  
+}
 void bootloader_start(void)
 {
     int err;
     const uint32_t app_vector_table = APP_START_ADDRESS;
     bool dfu_enter_check = false;
+    uint32_t ret_val;
 #if 0
     err = nrf_sdh_enable_request();
 	if (err) {
@@ -197,11 +223,26 @@ void bootloader_start(void)
 	LOG_INF("Bluetooth enabled\r\n");
  #endif  
 //dfu_enter_check =ble_dfu_enter_check();
-  if(dfu_enter_check)
+//  if(dfu_enter_check)
   {
       LOG_INF("Bootloader: enter dfu mode \r\n", app_vector_table);
       scheduler_init();
+
+       ret_val = nrf_dfu_init(dfu_observer);
+
+        while (true)
+        {
+
+
+            app_sched_execute();
+
+
+            sd_app_evt_wait();
+           
+        }
+ 
   }
+#if 0
   else
   {
 #if 0
@@ -218,6 +259,7 @@ void bootloader_start(void)
     while (1); // 不应该到这里
 
   }
+#endif
 
 }
 

@@ -52,7 +52,7 @@
 #define NRF_DFU_TRANSPORT_H__
 
 #include <stdint.h>
-#include "nrf_section.h"
+//#include "nrf_section.h"
 #include "nrf_dfu_types.h"
 
 #ifdef __cplusplus
@@ -122,7 +122,7 @@ uint32_t nrf_dfu_transports_close(nrf_dfu_transport_t const * p_exception);
  * @details     This macro places a variable in a section named "dfu_trans", which
  *              is initialized by @ref nrf_dfu_transports_init.
  */
-#define DFU_TRANSPORT_REGISTER(trans_var) NRF_SECTION_ITEM_REGISTER(dfu_trans, trans_var)
+//#define DFU_TRANSPORT_REGISTER(trans_var) NRF_SECTION_ITEM_REGISTER(dfu_trans, trans_var)
 
 
 #ifdef __cplusplus

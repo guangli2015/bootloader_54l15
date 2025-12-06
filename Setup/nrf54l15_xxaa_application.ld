@@ -282,6 +282,12 @@ SECTIONS
     KEEP(*(SORT(.sdh_stack_observers*)))
     PROVIDE(__stop_sdh_stack_observers = .);
   } > FLASH
+  .nrf_balloc . :
+  {
+    PROVIDE(__start_nrf_balloc = .);
+    KEEP(*(SORT(.nrf_balloc*)))
+    PROVIDE(__stop_nrf_balloc = .);
+  } > FLASH
 
     /* Define start of all sections that needs to be loaded on boot */
     . = ALIGN(4);

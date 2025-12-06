@@ -48,7 +48,7 @@
       arm_target_device_name="nRF54L15_M33"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="NRF54L15_XXAA;NRF_APPLICATION;__STARTUP_CLEAR_BSS"
-      c_user_include_directories=".;Source/nrfx/drivers;Source/nrfx/drivers/include;Source/nrfx/mdk;Source/nrfx/hal;Source/nrfx/haly;Source/nrfx/drivers/src;Source/nrfx/helpers;Source/nrfx/soc;Source;Source/nrfx;Source/cmsis/include;Source/FreeRTOS/portable/GCC/ARM_CM33_NTZ/non_secure;Source/FreeRTOS/include;Source/section_vars;Source/softdevice_handler;Source/softdevice/s115/s115_API/include;Source/ble_adv;Source/ble_conn_params;Source/bm_buttons;Source/bluetooth_services/ble_dis;Source/bluetooth_services/ble_lbs;Source/bluetooth_services;Source/bluetooth_services/ble_dfu;Source/rtt;Source/scheduler;Source/dfu;Source/ble_dfu"
+      c_user_include_directories=".;Source/nrfx/drivers;Source/nrfx/drivers/include;Source/nrfx/mdk;Source/nrfx/hal;Source/nrfx/haly;Source/nrfx/drivers/src;Source/nrfx/helpers;Source/nrfx/soc;Source;Source/nrfx;Source/cmsis/include;Source/FreeRTOS/portable/GCC/ARM_CM33_NTZ/non_secure;Source/FreeRTOS/include;Source/section_vars;Source/softdevice_handler;Source/softdevice/s115/s115_API/include;Source/ble_adv;Source/ble_conn_params;Source/bm_buttons;Source/bluetooth_services/ble_dis;Source/bluetooth_services/ble_lbs;Source/bluetooth_services;Source/bluetooth_services/ble_dfu;Source/rtt;Source/scheduler;Source/dfu;Source/ble_dfu;Source/balloc"
       debug_stack_pointer_start="__stack_end__"
       debug_target_connection="J-Link"
       gcc_entry_point="Reset_Handler"
@@ -128,8 +128,20 @@
       <file file_name="Source/FreeRTOS/timers.c" />
     </folder>
     <folder Name="NRF_DFU">
+      <file file_name="Source/balloc/nrf_balloc.c" />
       <file file_name="Source/dfu/nrf_dfu.c" />
       <file file_name="Source/ble_dfu/nrf_dfu_ble.c">
+        <configuration Name="Debug" build_exclude_from_build="No" />
+      </file>
+      <file file_name="Source/dfu/nrf_dfu_handling_error.c" />
+      <file file_name="Source/dfu/nrf_dfu_req_handler.c" />
+      <file file_name="Source/dfu/nrf_dfu_transport.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
+      <file file_name="Source/dfu/nrf_dfu_validation.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
+      <file file_name="Source/dfu/nrf_fstorage.c">
         <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
     </folder>

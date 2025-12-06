@@ -74,7 +74,7 @@ extern "C" {
 #if defined(NRF51)
     #define CODE_PAGE_SIZE            (PAGE_SIZE_IN_WORDS * sizeof(uint32_t))
 #elif defined(NRF52_SERIES)
-    #define CODE_PAGE_SIZE            (MBR_PAGE_SIZE_IN_WORDS * sizeof(uint32_t))
+    #define CODE_PAGE_SIZE            (1024 * sizeof(uint32_t))
 #else
     #error "Architecture not set."
 #endif

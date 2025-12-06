@@ -54,9 +54,10 @@
 #define NRF_DFU_BLE_H__
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "ble_gatts.h"
 #include "ble.h"
-#include "nrf_dfu_transport.h"
+#include "nrf_dfu_types.h"
 
 
 #ifdef __cplusplus
@@ -103,7 +104,8 @@ uint32_t ble_dfu_transport_init(nrf_dfu_observer_t observer);
  * @retval NRF_SUCCESS  If successful.
  * @return Error code from sub-call on error.
  */
-uint32_t ble_dfu_transport_close(nrf_dfu_transport_t const * p_exception);
+//uint32_t ble_dfu_transport_close(nrf_dfu_transport_t const * p_exception);
+uint32_t ble_dfu_transport_close(bool p_exception);
 
 /**@brief Function for disconnecting from the BLE peer and starting advertising.
  *

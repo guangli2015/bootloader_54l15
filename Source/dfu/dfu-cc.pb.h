@@ -42,7 +42,7 @@
 
 #ifndef PB_DFU_CC_PB_H_INCLUDED
 #define PB_DFU_CC_PB_H_INCLUDED
-#include <pb.h>
+
 
 /* @@protoc_insertion_point(includes) */
 #if PB_PROTO_HEADER_VERSION != 30

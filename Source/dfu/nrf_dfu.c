@@ -84,16 +84,21 @@ uint32_t nrf_dfu_init(nrf_dfu_observer_t observer)
     LOG_INF("Entering DFU mode.");
 
     dfu_observer(NRF_DFU_EVT_DFU_INITIALIZED);
-
+    ret_val = nrf_dfu_req_handler_init(dfu_observer);
+    if (ret_val != NRF_SUCCESS)
+    {
+        LOG_INF("nrf_dfu_req_handler_init fail\r\n", ret_val);
+        return ret_val;
+    }
     // Initializing transports
     ret_val = ble_dfu_transport_init(dfu_observer);
     if (ret_val != NRF_SUCCESS)
     {
-        LOG_INF("Could not initalize DFU transport: 0x%08x", ret_val);
+        LOG_INF("Could not initalize DFU transport: 0x%08x\r\n", ret_val);
         return ret_val;
     }
 
-    ret_val = nrf_dfu_req_handler_init(dfu_observer);
+    
 
     return ret_val;
 }

@@ -8,7 +8,7 @@
 #include <nrf_sdh.h>
 #include <nrf_sdh_ble.h>
 #include <string.h>
-#include "log.h"
+//#include "log.h"
 #include "err_num.h"
 #include "prj_config.h"
 /**
@@ -29,7 +29,7 @@
 #define LOG_ERR
 #define LOG_WRN
 #define __ASSERT
-
+#define LOG_INF
 extern void ble_conn_params_event_send(const struct ble_conn_params_evt *evt);
 
 /* Preferred connection parameters */

@@ -656,7 +656,7 @@ static void on_data_obj_execute_request_sched(void * p_evt, uint16_t event_lengt
 
     }
 
-    NRF_LOG_DEBUG("Request handling complete. Result: 0x%x", res.result);
+    NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", res.result);
 }
 
 
@@ -852,7 +852,7 @@ static void nrf_dfu_req_handler_req_process(nrf_dfu_request_t * p_req)
 
     if (response_ready)
     {
-        NRF_LOG_DEBUG("Request handling complete. Result: 0x%x", response.result);
+        NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", response.result);
 
         p_req->callback.response(&response, p_req->p_context);
 

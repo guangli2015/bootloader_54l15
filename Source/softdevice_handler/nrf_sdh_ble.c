@@ -10,7 +10,7 @@
 #include <nrf_sdh_ble.h>
 #include <ble.h>
 #include <string.h>
-#include "log.h"
+//#include "log.h"
 //#define APP_RAM_START 0x20004400
 #define	EFAULT 14	/* Bad address */
 #define CONFIG_NRF_SDH_BLE_CONN_TAG 99
@@ -26,6 +26,7 @@
 #define LOG_WRN
 #define LOG_DBG
 #define LOG_ERR
+#define LOG_INF
 #define __ASSERT
 //LOG_MODULE_DECLARE(nrf_sdh, CONFIG_NRF_SDH_LOG_LEVEL);
 // Create section set "sdh_ble_observers".

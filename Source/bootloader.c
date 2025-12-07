@@ -183,15 +183,15 @@ static void dfu_observer(nrf_dfu_evt_type_t evt_type)
     {
         case NRF_DFU_EVT_DFU_STARTED:
         case NRF_DFU_EVT_OBJECT_RECEIVED:
-               LOG_INF("NRF_DFU_EVT_DFU_STARTED/NRF_DFU_EVT_OBJECT_RECEIVED \r\n");
+               //LOG_INF("NRF_DFU_EVT_DFU_STARTED/NRF_DFU_EVT_OBJECT_RECEIVED \r\n");
             break;
         case NRF_DFU_EVT_DFU_COMPLETED:
         case NRF_DFU_EVT_DFU_ABORTED:
-            LOG_INF("NRF_DFU_EVT_DFU_COMPLETED/NRF_DFU_EVT_DFU_ABORTED \r\n");
-            NVIC_SystemReset();
+            //LOG_INF("NRF_DFU_EVT_DFU_COMPLETED/NRF_DFU_EVT_DFU_ABORTED \r\n");
+            //NVIC_SystemReset();
             break;
         case NRF_DFU_EVT_TRANSPORT_DEACTIVATED:
-                LOG_INF("NRF_DFU_EVT_TRANSPORT_DEACTIVATED \r\n");
+                //LOG_INF("NRF_DFU_EVT_TRANSPORT_DEACTIVATED \r\n");
             break;
         default:
             break;

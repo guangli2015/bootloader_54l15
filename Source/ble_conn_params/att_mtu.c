@@ -8,7 +8,7 @@
 #include <ble_gattc.h>
 #include <ble_conn_params.h>
 #include <nrf_sdh_ble.h>
-#include "log.h"
+//#include "log.h"
 #include "err_num.h"
 #include <stdbool.h>
 #include "prj_config.h"
@@ -16,6 +16,7 @@
 #define LOG_DBG
 #define LOG_ERR
 #define LOG_WRN
+#define LOG_INF
 #define __ASSERT
 //#define true	1
 //#define false	0

@@ -4,7 +4,6 @@
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x1b9b0" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0xceba" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
-  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault;SecureFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBuffer>
@@ -28,6 +27,7 @@
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_adv"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_conn_params"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bluetooth_services"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_buttons"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;NRF_DFU"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;scheduler"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Setup"/>
@@ -65,28 +65,42 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="50" y="484" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" selected="1" top="453" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="843" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" top="819" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="193" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="166" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="17" y="194" useTextEdit="1" path="Source/dfu/nrf_dfu_validation.c" left="0" top="190" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="26" y="65" useTextEdit="1" path="Source/dfu/nrf_dfu_settings.h" left="0" top="38" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="4" y="107" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="81" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="54" y="81" useTextEdit="1" path="Source/dfu/nrf_dfu_flash.h" left="0" top="71" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/bluetooth_services/ble_dfu/ble_dfu.c" left="0" top="36" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" top="15" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="11" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/err_num.h" left="0" top="170" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_conn_params/conn_param.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_conn_params/data_length.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_conn_params/event.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_conn_params/phy_mode.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="748" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" selected="1" top="725" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="10" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/err_num.h" left="0" top="151" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="31" useTextEdit="1" path="Source/ble_conn_params/conn_param.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" path="Source/ble_conn_params/data_length.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="12" useTextEdit="1" path="Source/ble_conn_params/event.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="11" useTextEdit="1" path="Source/ble_conn_params/phy_mode.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="44" useTextEdit="1" path="Source/bluetooth_services/ble_dfu/ble_dfu_unbonded.c" left="0" top="12" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="46" y="64" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="33" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="39" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="51" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu.h" left="0" top="37" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="51" useTextEdit="1" path="Source/bootloader.c" left="0" top="37" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="66" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="31" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="93" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu.h" left="0" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="190" useTextEdit="1" path="Source/bootloader.c" left="0" top="160" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="25" y="574" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_soc.h" left="0" top="539" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="53" y="7" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="333" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="307" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="343" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="293" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="45" y="1587" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/ble_gap.h" left="0" top="1573" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="58" useTextEdit="1" path="Source/ble_lbs_sample.c" left="0" top="33" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="353" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_ble.c" left="0" top="308" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="79" y="315" useTextEdit="1" path="Source/ble_adv/ble_adv.c" left="0" top="257" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="37" useTextEdit="1" path="Source/ble_adv/ble_adv.h" left="0" top="13" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="127" useTextEdit="1" path="Source/main.c" left="0" top="106" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="23" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="121" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="102" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="579" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/ble.h" left="0" top="551" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="67" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.h" left="0" top="42" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_handling_error.c" left="0" top="2" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_buttonless_dfu_ex.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="52" y="227" useTextEdit="1" path="Source/balloc/nrf_balloc.h" left="0" top="206" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

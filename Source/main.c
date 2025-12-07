@@ -126,8 +126,8 @@ extern void bootloader_start(void);
 static uint64_t last_count; /* Time (SYSCOUNTER value) @last sys_clock_announce() */
 int main(void)
 {
-//SysTick_Configuration();
- // softdevice_irq_init();
+SysTick_Configuration();
+softdevice_irq_init();
 
 //  log_init();
 
@@ -145,10 +145,10 @@ int main(void)
 #endif
  SEGGER_RTT_printf(0, "\n bootloader hello\n");
    //trigger_hardfault();
-   uint32_t vector_table_addr = 0x0;
+   //uint32_t vector_table_addr = 0x0;
    // 读取应用程序的 MSP 和 Reset_Handler
-    uint32_t new_msp       = *((uint32_t *)(vector_table_addr));
-    uint32_t reset_handler = *((uint32_t *)(vector_table_addr + 4));
+   // uint32_t new_msp       = *((uint32_t *)(vector_table_addr));
+   // uint32_t reset_handler = *((uint32_t *)(vector_table_addr + 4));
 //SEGGER_RTT_printf(0,"vector_table_addr 0x%x MSP=0x%x, Reset_Handler=0x%x\r\n", vector_table_addr,new_msp, reset_handler);
 #if 0
     BaseType_t xReturned1 = xTaskCreate(softdevice_init_task,
@@ -288,9 +288,9 @@ static int sys_clock_driver_init(void)
 void SysTick_Configuration(void)
 {
   nrfx_clock_init(clk_event_handler);	
-  nrfx_clock_enable();
-  //sys_clock_driver_init();
-  nrfx_clock_lfclk_start();
+  //nrfx_clock_enable();
+  sys_clock_driver_init();
+  //nrfx_clock_lfclk_start();
 }
 #endif
 #if 0

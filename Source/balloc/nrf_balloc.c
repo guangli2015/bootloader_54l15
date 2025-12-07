@@ -280,7 +280,7 @@ ret_code_t nrf_balloc_init(nrf_balloc_t const * p_pool)
     }
 #endif
 
-    LOG_INF("Initialized (size: %u x %u = %u bytes)",
+    LOG_INF("nrf_balloc Initialized (size: %u x %u = %u bytes)",
                       pool_size,
                       p_pool->block_size,
                       pool_size * p_pool->block_size);
@@ -331,7 +331,7 @@ void * nrf_balloc_alloc(nrf_balloc_t const * p_pool)
     }
 #endif
 
-    LOG_INF("Allocating element: 0x%08X", p_block);
+    LOG_INF("Allocating element: 0x%08X\r\n", p_block);
 
     return p_block;
 }
@@ -341,7 +341,7 @@ void nrf_balloc_free(nrf_balloc_t const * p_pool, void * p_element)
     ASSERT(p_pool != NULL);
     ASSERT(p_element != NULL)
 
-    LOG_INF("Freeing element: 0x%08X", p_element);
+    LOG_INF("Freeing element: 0x%08X\r\n", p_element);
 
 #if NRF_BALLOC_CONFIG_DEBUG_ENABLED
     void * p_block = nrf_balloc_element_wrap(p_pool, p_element);

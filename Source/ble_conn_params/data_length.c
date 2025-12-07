@@ -9,11 +9,12 @@
 #include <string.h>
 #include "prj_config.h"
 #include <stdbool.h>
-#include "log.h"
+//#include "log.h"
 #include "err_num.h"
 #define LOG_DBG
 #define LOG_ERR
 #define LOG_WRN
+#define LOG_INF
 #define __ASSERT
 #define BLE_GAP_DATA_LENGTH_DEFAULT 27
 #define BLE_GAP_DATA_LENGTH_MAX 251

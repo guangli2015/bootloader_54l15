@@ -9,12 +9,13 @@
 #include <nrf_sdh_ble.h>
 #include "prj_config.h"
 
-#include "log.h"
+//#include "log.h"
 #include "err_num.h"
 
 #define LOG_DBG
 #define LOG_ERR
 #define LOG_WRN
+#define LOG_INF
 #define __ASSERT
 extern void ble_conn_params_event_send(const struct ble_conn_params_evt *evt);
 

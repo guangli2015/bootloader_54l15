@@ -86,19 +86,21 @@
     </folder>
     <folder Name="bluetooth_services">
       <file file_name="Source/bluetooth_services/ble_dfu/ble_dfu.c">
-        <configuration Name="Debug" build_exclude_from_build="No" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="Source/bluetooth_services/ble_dfu/ble_dfu_unbonded.c">
-        <configuration Name="Debug" build_exclude_from_build="No" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="Source/bluetooth_services/ble_dis/dis.c">
         <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
-      <file file_name="Source/bluetooth_services/ble_lbs/lbs.c" />
+      <file file_name="Source/bluetooth_services/ble_lbs/lbs.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
     </folder>
     <folder Name="bm_buttons">
       <file file_name="Source/bm_buttons/bm_buttons.c">
-        <configuration Name="Debug" build_exclude_from_build="No" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
     </folder>
     <folder Name="freeRTOS">
@@ -186,7 +188,7 @@
       <file file_name="Source/bootloader.c" />
       <file file_name="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" />
       <file file_name="Source/log.c">
-        <configuration Name="Debug" build_exclude_from_build="No" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="Source/main.c" />
       <file file_name="Source/nrfx/soc/nrfx_atomic.c">
@@ -199,7 +201,9 @@
       <file file_name="Source/nrfx_glue.c" />
       <file file_name="Source/nrfx/drivers/src/nrfx_gpiote.c" />
       <file file_name="Source/nrfx/drivers/src/nrfx_grtc.c" />
-      <file file_name="Source/nrfx/drivers/src/nrfx_uarte.c" />
+      <file file_name="Source/nrfx/drivers/src/nrfx_uarte.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
       <file file_name="Source/rtt/SEGGER_RTT.c" />
       <file file_name="Source/rtt/SEGGER_RTT_printf.c" />
       <file file_name="Source/softdevice_test.c">

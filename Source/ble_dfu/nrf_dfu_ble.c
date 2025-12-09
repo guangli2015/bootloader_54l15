@@ -71,7 +71,9 @@
         const uint32_t LOCAL_ERR_CODE = (ERR_CODE);         \
         if (LOCAL_ERR_CODE != NRF_SUCCESS)                  \
         {                                                   \
-            NVIC_SystemReset();             \
+            LOG_INF("APP_ERROR_CHECK failed at %s:%d, err=0x%08X\n", \
+                    __FILE__, __LINE__, LOCAL_ERR_CODE);    \
+                while(1);   \                                                
         }                                                   \
     } while (0)
 
@@ -609,7 +611,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
     };
 
     if (!is_cccd_configured(p_dfu))
-    {
+    {LOG_INF("is_cccd_configured false**\r\n");
         /* Send an error response to the peer indicating that the CCCD is improperly configured. */
         auth_reply.params.write.gatt_status = BLE_GATT_STATUS_ATTERR_CPS_CCCD_CONFIG_ERROR;
 
@@ -618,7 +620,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
         return false;
     }
     else
-    {
+    {LOG_INF("is_cccd_configured true**\r\n");
         auth_reply.params.write.gatt_status = BLE_GATT_STATUS_SUCCESS;
 
         err_code = sd_ble_gatts_rw_authorize_reply(m_conn_handle, &auth_reply);
@@ -629,7 +631,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
 
 static void on_flash_write(void * p_buf)
 {
-    LOG_INF("Freeing buffer %p", p_buf);
+    LOG_INF("Freeing buffer %p\r\n", p_buf);
     nrf_balloc_free(&m_buffer_pool, p_buf);
 }
 
@@ -690,7 +692,32 @@ LOG_INF("on_write***\r\n");
     }
 }
 
+uint16_t determine_mtu_reply(uint16_t mtu_requested)
+{
+      uint16_t mtu_reply;
+    if (mtu_requested < NRF_SDH_BLE_GATT_MAX_MTU_SIZE)
+    {
+                /* Round the payload size down to a multiple of 4 so it is word-aligned. */
+                if (GATT_PAYLOAD(mtu_requested) % 4)
+                {
+                    mtu_reply = GATT_PAYLOAD(mtu_requested) - 4;
+                    mtu_reply = ALIGN_NUM(4, mtu_reply);
+                    /* Add the header len to the MTU. */
+                    mtu_reply += GATT_HEADER_LEN;
+                }
+                else
+                {
+                    mtu_reply = mtu_requested;
+                }
+    }
+    else
+    {
+        mtu_reply = NRF_SDH_BLE_GATT_MAX_MTU_SIZE;
+    }
 
+    return mtu_reply;
+
+}
 /**@brief Function for the Application's SoftDevice event handler.
  *
  * @param[in] p_ble_evt SoftDevice event.
@@ -843,10 +870,10 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             ble_gap_conn_params_t const * p_conn =
                 &p_gap->params.conn_param_update.conn_params;
 
-           // NRF_LOG_DEBUG("max_conn_interval: %d", p_conn->max_conn_interval);
-           // NRF_LOG_DEBUG("min_conn_interval: %d", p_conn->min_conn_interval);
-           // NRF_LOG_DEBUG("slave_latency: %d",     p_conn->slave_latency);
-           // NRF_LOG_DEBUG("conn_sup_timeout: %d",  p_conn->conn_sup_timeout);
+            NRF_LOG_DEBUG("max_conn_interval: %d", p_conn->max_conn_interval);
+            NRF_LOG_DEBUG("min_conn_interval: %d", p_conn->min_conn_interval);
+            NRF_LOG_DEBUG("slave_latency: %d",     p_conn->slave_latency);
+            NRF_LOG_DEBUG("conn_sup_timeout: %d\r\n",  p_conn->conn_sup_timeout);
         } break;
 #endif
 #if 0
@@ -864,7 +891,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
             APP_ERROR_CHECK(err_code);
         } break;
-#endif
+
 
         case BLE_GAP_EVT_PHY_UPDATE:
         {
@@ -888,7 +915,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             err_code = sd_ble_gap_phy_update(p_gap->conn_handle, &phys);
             APP_ERROR_CHECK(err_code);
         } break;
-
+#endif
         case BLE_GATTS_EVT_TIMEOUT:
         {
             if (p_ble_evt->evt.gatts_evt.params.timeout.src == BLE_GATT_TIMEOUT_SRC_PROTOCOL)
@@ -1137,10 +1164,19 @@ static uint32_t dfu_pkt_char_add(ble_dfu_t * const p_dfu)
  */
 static uint32_t dfu_ctrl_pt_add(ble_dfu_t * const p_dfu)
 {
+   ble_gatts_attr_md_t cccd_md = {
+          .vloc = BLE_GATTS_VLOC_STACK
+    };
+
     ble_gatts_char_md_t char_md =
     {
-        .char_props.write  = 1,
-        .char_props.notify = 1,
+        //.char_props.write  = 1,
+        //.char_props.notify = 1,
+        .char_props = {
+            .notify = true,
+            .write = true,
+        },
+        .p_cccd_md = &cccd_md,
     };
 
     ble_uuid_t char_uuid =
@@ -1169,8 +1205,14 @@ static uint32_t dfu_ctrl_pt_add(ble_dfu_t * const p_dfu)
     {
         .p_uuid    = &char_uuid,
         .p_attr_md = &attr_md,
+        .p_value = NULL,
+        .init_len = 0,
         .max_len   = BLE_GATT_ATT_MTU_DEFAULT,
     };
+    /* Setup CCCD */
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&attr_md.write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.write_perm);
 
     return sd_ble_gatts_characteristic_add(p_dfu->service_handle,
                                            &char_md,

@@ -8,7 +8,7 @@
 #include <ble_gattc.h>
 #include <ble_conn_params.h>
 #include <nrf_sdh_ble.h>
-//#include "log.h"
+#include "log.h"
 #include "err_num.h"
 #include <stdbool.h>
 #include "prj_config.h"
@@ -16,7 +16,7 @@
 #define LOG_DBG
 #define LOG_ERR
 #define LOG_WRN
-#define LOG_INF
+//#define LOG_INF
 #define __ASSERT
 //#define true	1
 //#define false	0
@@ -50,12 +50,12 @@ static void mtu_exchange_request(uint16_t conn_handle, int idx)
 		LOG_ERR("Failed to initiate ATT MTU exchange, nrf_error %#x", err);
 	}
 }
-
+extern uint16_t determine_mtu_reply(uint16_t mtu_requested);
 static void on_exchange_mtu_req_evt(uint16_t conn_handle, int idx,
 				    const ble_gatts_evt_exchange_mtu_request_t *evt)
 {
 	int err;
-
+        uint16_t mtu_reply;
 	/* Determine the lowest ATT MTU between our own desired ATT MTU and the peer's,
 	 * and at the same time ensure that we don't go lower than the actual MTU size.
 	 */
@@ -63,15 +63,18 @@ static void on_exchange_mtu_req_evt(uint16_t conn_handle, int idx,
 		MAX(links[idx].att_mtu, MIN(evt->client_rx_mtu, links[idx].att_mtu_desired));
 	links[idx].att_mtu_exchange_pending = false;
 
-	LOG_INF("Peer %#x requested ATT MTU of %u bytes", conn_handle, evt->client_rx_mtu);
-
+	LOG_INF("Peer %#x requested ATT MTU of %u bytes\r\n", conn_handle, evt->client_rx_mtu);
+       // mtu_reply = determine_mtu_reply(evt->client_rx_mtu);
+        LOG_INF("mtu_reply %d\r\n", links[idx].att_mtu);
 	err = sd_ble_gatts_exchange_mtu_reply(conn_handle, links[idx].att_mtu);
+        //err = sd_ble_gatts_exchange_mtu_reply(conn_handle, mtu_reply);
 	if (err) {
-		LOG_ERR("Failed to reply to MTU exchange request, nrf_error %#x", err);
+		LOG_INF("Failed to reply to MTU exchange request, nrf_error %#x\r\n", err);
 		return;
 	}
 
-	LOG_INF("ATT MTU set to %u bytes for peer %#x", links[idx].att_mtu, conn_handle);
+	LOG_INF("ATT MTU set to %u bytes for peer %#x\r\n", links[idx].att_mtu, conn_handle);
+        //LOG_INF("ATT MTU set to %u bytes for peer %#x\r\n", mtu_reply, conn_handle);
 
 	/* The ATT MTU exchange has finished, send an event to the application */
 	const struct ble_conn_params_evt app_evt = {

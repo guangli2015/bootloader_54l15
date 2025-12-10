@@ -52,7 +52,8 @@
 #else
     #define NRF_LOG_LEVEL       0
 #endif // NRF_BALLOC_CONFIG_LOG_ENABLED
-#include "log.h"
+//#include "log.h"
+#define LOG_INF
 #define VERIFY_FALSE(statement, err_code)   \
 do                                          \
 {                                           \

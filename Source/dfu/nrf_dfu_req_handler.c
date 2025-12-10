@@ -315,6 +315,9 @@ static void on_cmd_obj_create_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
         // Set the init command size.
         s_dfu_settings.progress.command_size = size;
     }
+    NRF_LOG_DEBUG("command_size = 0x%x\r\n",
+                  s_dfu_settings.progress.command_size);
+
     p_res->result = ext_err_code_handle(ret_val);
 }
 
@@ -326,7 +329,7 @@ static void on_cmd_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_response
     ASSERT(p_req->write.len);
     ASSERT(p_res);
 
-    NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_WRITE (command)");
+    //NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_WRITE (command)");
 
     //nrf_dfu_result_t ret_val;
 
@@ -390,6 +393,10 @@ static void on_cmd_obj_execute_request(nrf_dfu_request_t const * p_req, nrf_dfu_
         }
     }
 #endif
+ NRF_LOG_DEBUG("command_offset = 0x%x,command_size = 0x%x\r\n",
+                  s_dfu_settings.progress.command_offset,
+                  s_dfu_settings.progress.command_size,
+                  p_res->select.max_size);
     p_res->result = NRF_DFU_RES_CODE_SUCCESS;
 }
 
@@ -398,7 +405,9 @@ static void on_cmd_obj_crc_request(nrf_dfu_request_t const * p_req, nrf_dfu_resp
 {
     UNUSED_PARAMETER(p_req);
     NRF_LOG_DEBUG("Handle NRF_DFU_OP_CRC_GET (command)");
-
+ NRF_LOG_DEBUG(" command_offset = 0x%x,command_crc = 0x%x\r\n",
+                  s_dfu_settings.progress.command_offset,
+                  s_dfu_settings.progress.command_crc);
     cmd_response_offset_and_crc_set(p_res);
 }
 
@@ -461,7 +470,7 @@ static void on_data_obj_select_request(nrf_dfu_request_t * p_req, nrf_dfu_respon
 
     p_res->select.max_size = DATA_OBJECT_MAX_SIZE;
 
-    NRF_LOG_DEBUG("crc = 0x%x, offset = 0x%x, max_size = 0x%x",
+    NRF_LOG_DEBUG("crc = 0x%x, offset = 0x%x, max_size = 0x%x\r\n",
                   p_res->select.crc,
                   p_res->select.offset,
                   p_res->select.max_size);
@@ -530,7 +539,7 @@ static void on_data_obj_create_request(nrf_dfu_request_t * p_req, nrf_dfu_respon
         return;
     }
 #endif
-    NRF_LOG_DEBUG("Creating object with size: %d. Offset: 0x%08x, CRC: 0x%08x",
+    NRF_LOG_DEBUG("Creating object with size: 0x%x. Offset: 0x%x, CRC: 0x%x\r\n",
                  s_dfu_settings.progress.data_object_size,
                  s_dfu_settings.progress.firmware_image_offset,
                  s_dfu_settings.progress.firmware_image_crc);
@@ -539,7 +548,7 @@ static void on_data_obj_create_request(nrf_dfu_request_t * p_req, nrf_dfu_respon
 
 static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p_res)
 {
-    NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_WRITE (data)");
+    //NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_WRITE (data)");
 
     if (0)
     {
@@ -571,14 +580,14 @@ static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
     ret_code_t ret = 0;
        // nrf_dfu_flash_store(write_addr, p_req->write.p_data, p_req->write.len, p_req->callback.write);
 
-    if (ret != NRF_SUCCESS)
+    //if (ret != NRF_SUCCESS)
     {
         /* When nrf_dfu_flash_store() fails because there is no space in the queue,
          * stop processing the request so that the peer can detect a CRC error
          * and retransmit this object. Remember to manually free the buffer !
          */
         p_req->callback.write((void*)p_req->write.p_data);
-        return;
+        //return;
     }
 
     /* Update the CRC of the firmware image. */
@@ -597,7 +606,7 @@ static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
 static void on_data_obj_crc_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p_res)
 {
     NRF_LOG_DEBUG("Handle NRF_DFU_OP_CRC_GET (data)");
-    NRF_LOG_DEBUG("Offset:%d, CRC:0x%08x",
+    NRF_LOG_DEBUG("Offset:0x%x, CRC:0x%x\r\n",
                  s_dfu_settings.progress.firmware_image_offset,
                  s_dfu_settings.progress.firmware_image_crc);
 
@@ -656,7 +665,7 @@ static void on_data_obj_execute_request_sched(void * p_evt, uint16_t event_lengt
 
     }
 
-    NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", res.result);
+    //NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", res.result);
 }
 
 
@@ -684,7 +693,9 @@ static bool on_data_obj_execute_request(nrf_dfu_request_t * p_req, nrf_dfu_respo
     s_dfu_settings.progress.firmware_image_offset_last = s_dfu_settings.progress.firmware_image_offset;
 
     on_data_obj_execute_request_sched(p_req, 0);
-
+ NRF_LOG_DEBUG("Offset:0x%x, CRC:0x%x",
+                 s_dfu_settings.progress.firmware_image_offset,
+                 s_dfu_settings.progress.firmware_image_crc);
     m_observer(NRF_DFU_EVT_OBJECT_RECEIVED);
 
     return false;
@@ -852,7 +863,7 @@ static void nrf_dfu_req_handler_req_process(nrf_dfu_request_t * p_req)
 
     if (response_ready)
     {
-        NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", response.result);
+        //NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", response.result);
 
         p_req->callback.response(&response, p_req->p_context);
 

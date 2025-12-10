@@ -1,51 +1,23 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x1b9b0" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0xceba" stopAll="false" group="Breakpoints" type="Breakpoint" state="3" filename="../bootloader_54l15" useHWbreakpoint="false"/>
- </Breakpoints>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
  <ExecutionProfileWindow/>
- <FrameBuffer>
-  <FrameBufferWindow width="0" keepAspectRatio="0" zoomToFitWindow="0" showGrid="0" addressSpace="" format="0" height="0" autoEvaluate="0" scaleFactor="1" refreshPeriod="0" name="bootloader_54l15_Debug" addressText="" accessByDisplayWidth="0"/>
- </FrameBuffer>
- <Memory1>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText="0xAFC0"/>
- </Memory1>
- <Memory2>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
- </Memory2>
- <Memory3>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
- </Memory3>
- <Memory4>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
- </Memory4>
+ <FrameBuffer/>
+ <Memory1/>
+ <Memory2/>
+ <Memory3/>
+ <Memory4/>
  <Project>
   <ProjectSessionItem path="bootloader_54l15"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_adv"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_conn_params"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bluetooth_services"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_buttons"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;NRF_DFU"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;scheduler"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Setup"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;softdevice_handler"/>
-  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Source"/>
  </Project>
- <Register1>
-  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
- </Register1>
- <Register2>
-  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
- </Register2>
- <Register3>
-  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
- </Register3>
- <Register4>
-  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
- </Register4>
+ <Register1/>
+ <Register2/>
+ <Register3/>
+ <Register4/>
  <Threads>
   <ThreadsWindow showLists=""/>
  </Threads>
@@ -65,42 +37,12 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="843" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" top="819" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="630" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" selected="1" top="617" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="595" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" top="226" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="193" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="166" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="194" useTextEdit="1" path="Source/dfu/nrf_dfu_validation.c" left="0" top="190" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="65" useTextEdit="1" path="Source/dfu/nrf_dfu_settings.h" left="0" top="38" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="107" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="81" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="54" y="81" useTextEdit="1" path="Source/dfu/nrf_dfu_flash.h" left="0" top="71" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/bluetooth_services/ble_dfu/ble_dfu.c" left="0" top="36" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="748" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" selected="1" top="725" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="10" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/err_num.h" left="0" top="151" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="31" useTextEdit="1" path="Source/ble_conn_params/conn_param.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" path="Source/ble_conn_params/data_length.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="12" useTextEdit="1" path="Source/ble_conn_params/event.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="11" useTextEdit="1" path="Source/ble_conn_params/phy_mode.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="44" useTextEdit="1" path="Source/bluetooth_services/ble_dfu/ble_dfu_unbonded.c" left="0" top="12" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="66" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="31" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="93" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="54" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu.h" left="0" top="26" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="190" useTextEdit="1" path="Source/bootloader.c" left="0" top="160" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="574" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_soc.h" left="0" top="539" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="53" y="7" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="343" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="293" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="45" y="1587" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/ble_gap.h" left="0" top="1573" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="58" useTextEdit="1" path="Source/ble_lbs_sample.c" left="0" top="33" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="353" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_ble.c" left="0" top="308" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="79" y="315" useTextEdit="1" path="Source/ble_adv/ble_adv.c" left="0" top="257" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="37" useTextEdit="1" path="Source/ble_adv/ble_adv.h" left="0" top="13" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="127" useTextEdit="1" path="Source/main.c" left="0" top="106" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="33" useTextEdit="1" path="Source/log.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="23" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="121" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="102" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="579" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/ble.h" left="0" top="551" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="67" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.h" left="0" top="42" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_handling_error.c" left="0" top="2" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/ble_buttonless_dfu_ex.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="52" y="227" useTextEdit="1" path="Source/balloc/nrf_balloc.h" left="0" top="206" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="55" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="18" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="220" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="189" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

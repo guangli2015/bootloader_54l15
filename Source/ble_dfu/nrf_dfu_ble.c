@@ -91,7 +91,7 @@ do                                                      \
         return _err_code;                               \
     }                                                   \
 } while(0)
-#define NRF_SDH_BLE_GATT_MAX_MTU_SIZE 247
+#define NRF_SDH_BLE_GATT_MAX_MTU_SIZE CONFIG_BLE_CONN_PARAMS_ATT_MTU
 #define NRF_DFU_BLE_MIN_CONN_INTERVAL 12
 #define NRF_DFU_BLE_MAX_CONN_INTERVAL 12
 #define NRF_DFU_BLE_CONN_SUP_TIMEOUT_MS 6000
@@ -152,7 +152,7 @@ static nrf_dfu_peer_data_t m_peer_data;
 #else
 static nrf_dfu_adv_name_t  m_adv_name;
 #endif
-
+static volatile uint32_t used_buf_num =0;
 static uint32_t           m_flags;
 static ble_dfu_t          m_dfu;                                                                    /**< Structure used to identify the Device Firmware Update service. */
 static uint16_t           m_pkt_notif_target;                                                       /**< Number of packets of firmware data to be received before transmitting the next Packet Receipt Notification to the DFU Controller. */
@@ -536,7 +536,7 @@ static uint32_t on_ctrl_pt_write(ble_dfu_t * p_dfu, ble_gatts_evt_write_t const 
         .p_context         = p_dfu,
         .callback.response = ble_dfu_req_handler_callback,
     };
-    LOG_INF("on_ctrl_pt_write***\r\n");
+    //LOG_INF("on_ctrl_pt_write***\r\n");
     switch (request.request)
     {
         case NRF_DFU_OP_OBJECT_SELECT:
@@ -611,7 +611,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
     };
 
     if (!is_cccd_configured(p_dfu))
-    {LOG_INF("is_cccd_configured false**\r\n");
+    {//LOG_INF("is_cccd_configured false**\r\n");
         /* Send an error response to the peer indicating that the CCCD is improperly configured. */
         auth_reply.params.write.gatt_status = BLE_GATT_STATUS_ATTERR_CPS_CCCD_CONFIG_ERROR;
 
@@ -620,7 +620,7 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
         return false;
     }
     else
-    {LOG_INF("is_cccd_configured true**\r\n");
+    {//LOG_INF("is_cccd_configured true**\r\n");
         auth_reply.params.write.gatt_status = BLE_GATT_STATUS_SUCCESS;
 
         err_code = sd_ble_gatts_rw_authorize_reply(m_conn_handle, &auth_reply);
@@ -631,7 +631,8 @@ static bool on_rw_authorize_req(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
 
 static void on_flash_write(void * p_buf)
 {
-    LOG_INF("Freeing buffer %p\r\n", p_buf);
+    //LOG_INF("Freeing buffer %p\r\n", p_buf);
+    --used_buf_num;
     nrf_balloc_free(&m_buffer_pool, p_buf);
 }
 
@@ -644,7 +645,7 @@ static void on_flash_write(void * p_buf)
 static void on_write(ble_dfu_t * p_dfu, ble_evt_t const * p_ble_evt)
 {
     ble_gatts_evt_write_t const * const p_write_evt = &p_ble_evt->evt.gatts_evt.params.write;
-LOG_INF("on_write***\r\n");
+//LOG_INF("on_write***\r\n");
     if (p_write_evt->handle != p_dfu->dfu_pkt_handles.value_handle)
     {
         return;
@@ -658,9 +659,11 @@ LOG_INF("on_write***\r\n");
         LOG_INF("cannot allocate memory buffer!");
         return;
     }
-
-    LOG_INF("Buffer %p acquired, len %d (%d)",
-                  p_balloc_buf, p_write_evt->len, MAX_DFU_PKT_LEN);
+    ++used_buf_num;
+    //LOG_INF("used_buf_num %d\r\n",used_buf_num);
+                 
+    //LOG_INF("Buffer %p acquired, len %d (%d)",
+    //              p_balloc_buf, p_write_evt->len, MAX_DFU_PKT_LEN);
 
     /* Copy payload into buffer. */
     memcpy(p_balloc_buf, p_write_evt->data, p_write_evt->len);

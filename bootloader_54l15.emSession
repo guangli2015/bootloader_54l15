@@ -12,7 +12,12 @@
   <ProjectSessionItem path="bootloader_54l15"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;ble_conn_params"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bluetooth_services"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_buttons"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_storage"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;NRF_DFU"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;softdevice_handler"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Source"/>
  </Project>
  <Register1/>
  <Register2/>
@@ -37,12 +42,26 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="630" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" selected="1" top="617" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="595" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" top="226" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="630" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" top="617" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="595" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" top="535" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="193" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="166" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="15" y="55" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="26" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="18" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="36" y="220" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="189" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="8" useTextEdit="1" path="Source/bm_storage/bm_storage.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="17" useTextEdit="1" path="Source/bm_storage/bm_storage.h" left="0" top="17" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="112" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="12" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="65" y="76" useTextEdit="1" path="Source/bm_storage/bm_storage_sd.c" left="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="189" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.c" left="0" top="147" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="142" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.h" left="0" top="105" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="34" useTextEdit="1" path="Source/softdevice_test.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="52" useTextEdit="1" path="Source/section_vars/nrf_section_iter.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="32" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic.c" left="0" top="7" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic_internal.h" left="0" top="225" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic.h" left="0" top="25" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="302" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_sdm.h" left="0" selected="1" top="272" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/bm_storage" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

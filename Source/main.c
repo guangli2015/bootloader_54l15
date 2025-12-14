@@ -123,6 +123,7 @@ static void softdevice_init_task(void * pvParameter)
 }
 extern int ble_buttonless_dfu_sample(void);
 extern void bootloader_start(void);
+extern int bm_storage_test(void);
 static uint64_t last_count; /* Time (SYSCOUNTER value) @last sys_clock_announce() */
 int main(void)
 {
@@ -172,8 +173,8 @@ softdevice_irq_init();
         /* Start FreeRTOS scheduler. */
     vTaskStartScheduler();
 #endif
-bootloader_start();
-
+//bootloader_start();
+bm_storage_test();
     return 0;
 }
 

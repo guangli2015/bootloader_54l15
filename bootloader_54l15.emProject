@@ -106,6 +106,7 @@
     <folder Name="bm_storage">
       <file file_name="Source/bm_storage/bm_storage.c" />
       <file file_name="Source/bm_storage/bm_storage_sd.c" />
+      <file file_name="Source/bm_storage/ring_buffer.c" />
     </folder>
     <folder Name="freeRTOS">
       <configuration Name="Debug" build_exclude_from_build="Yes" />
@@ -189,6 +190,7 @@
       <file file_name="Source/ble_lbs_sample.c">
         <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
+      <file file_name="Source/bm_storage_test.c" />
       <file file_name="Source/bootloader.c" />
       <file file_name="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" />
       <file file_name="Source/log.c">

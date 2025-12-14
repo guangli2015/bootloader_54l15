@@ -1,13 +1,25 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault;SecureFault"/>
+ </Breakpoints>
  <ExecutionProfileWindow/>
- <FrameBuffer/>
- <Memory1/>
- <Memory2/>
- <Memory3/>
- <Memory4/>
+ <FrameBuffer>
+  <FrameBufferWindow width="0" keepAspectRatio="0" zoomToFitWindow="0" showGrid="0" addressSpace="" format="0" height="0" autoEvaluate="0" scaleFactor="1" refreshPeriod="0" name="bootloader_54l15_Debug" addressText="" accessByDisplayWidth="0"/>
+ </FrameBuffer>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText="0x160220"/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="bootloader_54l15_Debug" sizeText="" addressText=""/>
+ </Memory4>
  <Project>
   <ProjectSessionItem path="bootloader_54l15"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15"/>
@@ -16,13 +28,22 @@
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_buttons"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;bm_storage"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;NRF_DFU"/>
+  <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Setup"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;softdevice_handler"/>
   <ProjectSessionItem path="bootloader_54l15;bootloader_54l15;Source"/>
  </Project>
- <Register1/>
- <Register2/>
- <Register3/>
- <Register4/>
+ <Register1>
+  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow invisibleNodes="" visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/MSPLIM;CPU/PSPLIM;CPU/internal;CPU Secure/MSP_S;CPU Secure/PSP_S;CPU Secure/MSPLIM_S;CPU Secure/PSPLIM_S;CPU Secure/PRIMASK_S;CPU Secure/BASEPRI_S;CPU Secure/FAULTMASK_S;CPU Secure/CONTROL_S;CPU Non-Secure/MSP_NS;CPU Non-Secure/PSP_NS;CPU Non-Secure/MSPLIM_NS;CPU Non-Secure/PSPLIM_NS;CPU Non-Secure/PRIMASK_NS;CPU Non-Secure/BASEPRI_NS;CPU Non-Secure/FAULTMASK_NS;CPU Non-Secure/CONTROL_NS" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_54l15_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
  <Threads>
   <ThreadsWindow showLists=""/>
  </Threads>
@@ -48,20 +69,36 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="15" y="55" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="26" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="18" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="36" y="220" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="189" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="8" useTextEdit="1" path="Source/bm_storage/bm_storage.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="17" useTextEdit="1" path="Source/bm_storage/bm_storage.h" left="0" top="17" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="120" useTextEdit="1" path="Source/bm_storage/bm_storage.c" left="0" top="91" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="125" useTextEdit="1" path="Source/bm_storage/bm_storage.h" left="0" top="104" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="112" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="39" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="12" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="65" y="76" useTextEdit="1" path="Source/bm_storage/bm_storage_sd.c" left="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="335" useTextEdit="1" path="Source/bm_storage/bm_storage_sd.c" left="0" top="314" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="189" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.c" left="0" top="147" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="142" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.h" left="0" top="105" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="34" useTextEdit="1" path="Source/softdevice_test.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="52" useTextEdit="1" path="Source/section_vars/nrf_section_iter.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="44" useTextEdit="1" path="Source/section_vars/nrf_section_iter.h" left="0" top="3" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="17" y="32" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic.c" left="0" top="7" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic_internal.h" left="0" top="225" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/nrfx/soc/nrfx_atomic.h" left="0" top="25" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="302" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_sdm.h" left="0" selected="1" top="272" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="302" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_sdm.h" left="0" top="272" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="55" useTextEdit="1" path="Source/bm_storage/ring_buffer.c" left="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="52" y="26" useTextEdit="1" path="Source/bm_storage/ring_buffer.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="145" useTextEdit="1" path="Source/bootloader.c" left="0" top="111" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="276" useTextEdit="1" path="C:/Program Files/SEGGER/SEGGER Embedded Studio 8.24/include/stdint.h" left="0" top="254" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="12" useTextEdit="1" path="Source/ble_conn_params/data_length.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/section_vars/nordic_common.h" left="0" top="75" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" path="Source/section_vars/nrf_section.h" left="0" top="10" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="18" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_soc.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="150" y="385" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="46" top="353" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="136" useTextEdit="1" path="Source/bm_storage_test.c" left="0" selected="1" top="155" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="128" useTextEdit="1" path="Source/main.c" left="0" top="113" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="64" useTextEdit="1" path="C:/Program Files/SEGGER/SEGGER Embedded Studio 8.24/include/string.h" left="0" top="43" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="142" useTextEdit="1" path="Source/nrfx_glue.h" left="0" top="121" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/rtt/SEGGER_RTT.c" left="0" top="153" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="493" useTextEdit="1" path="Source/rtt/SEGGER_RTT_printf.c" left="0" top="462" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/bm_storage" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

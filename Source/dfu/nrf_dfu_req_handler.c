@@ -59,6 +59,7 @@
 
 
 #include "log.h"
+#include <bm_storage.h>
 #define NRF_LOG_DEBUG LOG_INF
 #define NRF_LOG_ERROR LOG_INF
 #define STATIC_ASSERT
@@ -76,9 +77,22 @@
 #define UNUSED_VARIABLE(X)  ((void)(X))
 #define UNUSED_PARAMETER(X) UNUSED_VARIABLE(X)
 #define UNUSED_RETURN_VALUE(X) UNUSED_VARIABLE(X)
+#define STORAGE0_START 0x0000b000
+#define STORAGE0_SIZE 0x146800
+
+
+
+/* Write buffer size must be a multiple of the program unit.
+ * To support both RRAM (16 bytes) and SoftDevice (4 bytes) backends,
+ * that is 16 bytes.
+ */
+#define BUFFER_BLOCK_SIZE 20
+
+/* Forward declarations. */
+static void bm_storage_evt_handler(struct bm_storage_evt *evt);
 //STATIC_ASSERT(DFU_SIGNED_COMMAND_SIZE <= INIT_COMMAND_MAX_SIZE);
 
-static uint32_t m_firmware_start_addr;          /**< Start address of the current firmware image. */
+static uint32_t m_firmware_start_addr = 0xb000;          /**< Start address of the current firmware image. */
 static uint32_t m_firmware_size_req;            /**< The size of the entire firmware image. Defined by the init command. */
 
 static nrf_dfu_observer_t m_observer;
@@ -240,7 +254,34 @@ static void on_mtu_get_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p
     p_res->mtu.size = p_req->mtu.size;
 }
 #endif // !NRF_DFU_PROTOCOL_REDUCED
+static struct bm_storage storage = {
+	.evt_handler = bm_storage_evt_handler,
+	.start_addr = STORAGE0_START,
+	.end_addr = STORAGE0_START + STORAGE0_SIZE,
+};
 
+
+static void bm_storage_evt_handler(struct bm_storage_evt *evt)
+{
+	switch (evt->id) {
+	case BM_STORAGE_EVT_WRITE_RESULT:
+		LOG_INF("Handler : bm_storage_evt: WRITE_RESULT %d, DISPATCH_TYPE %d\r\n",
+			evt->result, evt->dispatch_type);
+		//outstanding_writes--;
+		break;
+	case BM_STORAGE_EVT_ERASE_RESULT:
+		/* Not used. */
+		break;
+	default:
+		break;
+	}
+      if (evt->ctx)
+    {
+       
+        ((nrf_dfu_flash_callback_t)(evt->ctx))((void*)evt->src);
+        //lint -restore
+    }
+}
 
 static void on_prn_set_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p_res)
 {
@@ -579,8 +620,8 @@ static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
 
     ret_code_t ret = 0;
        // nrf_dfu_flash_store(write_addr, p_req->write.p_data, p_req->write.len, p_req->callback.write);
-
-    //if (ret != NRF_SUCCESS)
+    ret = bm_storage_write(&storage, write_addr, p_req->write.p_data, p_req->write.len,(void *)(p_req->callback.write));	
+    if (ret != NRF_SUCCESS)
     {
         /* When nrf_dfu_flash_store() fails because there is no space in the queue,
          * stop processing the request so that the peer can detect a CRC error

@@ -173,8 +173,8 @@ softdevice_irq_init();
         /* Start FreeRTOS scheduler. */
     vTaskStartScheduler();
 #endif
-//bootloader_start();
-bm_storage_test();
+bootloader_start();
+//bm_storage_test();
     return 0;
 }
 

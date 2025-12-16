@@ -135,6 +135,9 @@
       <file file_name="Source/FreeRTOS/timers.c" />
     </folder>
     <folder Name="NRF_DFU">
+      <file file_name="Source/dfu/bm_dfu_flash.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
       <file file_name="Source/balloc/nrf_balloc.c" />
       <file file_name="Source/dfu/nrf_dfu.c" />
       <file file_name="Source/ble_dfu/nrf_dfu_ble.c">
@@ -190,7 +193,9 @@
       <file file_name="Source/ble_lbs_sample.c">
         <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
-      <file file_name="Source/bm_storage_test.c" />
+      <file file_name="Source/bm_storage_test.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
       <file file_name="Source/bootloader.c" />
       <file file_name="Source/nrfx/mdk/gcc_startup_nrf54l15_application.S" />
       <file file_name="Source/log.c">

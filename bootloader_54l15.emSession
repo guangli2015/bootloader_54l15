@@ -61,18 +61,18 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="678" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" top="658" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="118" y="622" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" selected="1" top="594" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="318" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="298" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="662" useTextEdit="1" path="Source/ble_dfu/nrf_dfu_ble.c" left="0" top="639" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="124" y="741" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.c" left="0" selected="1" top="717" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="302" useTextEdit="1" path="Source/dfu/nrf_dfu_types.h" left="0" top="296" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="15" y="55" useTextEdit="1" path="Source/balloc/nrf_balloc.c" left="0" top="26" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="18" useTextEdit="1" path="Source/ble_conn_params/att_mtu.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="297" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="277" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="100" useTextEdit="1" path="Source/bm_storage/bm_storage.c" left="0" top="91" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="125" useTextEdit="1" path="Source/bm_storage/bm_storage.h" left="0" top="104" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="103" useTextEdit="1" path="Source/dfu/nrf_dfu_req_handler.h" left="0" top="83" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="54" y="111" useTextEdit="1" path="Source/bm_storage/bm_storage.c" left="0" top="84" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="24" useTextEdit="1" path="Source/bm_storage/bm_storage.h" left="0" top="9" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice_handler/irq_forward.s" left="0" top="111" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="85" useTextEdit="1" path="Source/softdevice_handler/irq_connect.c" left="0" top="39" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="12" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="142" useTextEdit="1" path="Source/bm_storage/bm_storage_sd.c" left="0" top="125" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="32" y="70" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_error.h" left="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="428" useTextEdit="1" path="Source/bm_storage/bm_storage_sd.c" left="0" top="387" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="189" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.c" left="0" top="147" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="142" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh.h" left="0" top="105" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="34" useTextEdit="1" path="Source/softdevice_test.c" left="0" top="0" codecName="Default"/>
@@ -83,23 +83,28 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="39" y="302" useTextEdit="1" path="Source/softdevice/s115/s115_API/include/nrf_sdm.h" left="0" top="272" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="63" useTextEdit="1" path="Source/bm_storage/ring_buffer.c" left="0" top="16" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="308" useTextEdit="1" path="Source/bm_storage/ring_buffer.h" left="0" top="288" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="145" useTextEdit="1" path="Source/bootloader.c" left="0" top="111" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="267" useTextEdit="1" path="Source/bootloader.c" left="0" top="193" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="40" y="276" useTextEdit="1" path="C:/Program Files/SEGGER/SEGGER Embedded Studio 8.24/include/stdint.h" left="0" top="254" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="12" useTextEdit="1" path="Source/ble_conn_params/data_length.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/section_vars/nordic_common.h" left="0" top="75" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" path="Source/section_vars/nrf_section.h" left="0" top="10" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="18" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_soc.h" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="150" y="385" useTextEdit="1" path="Setup/nrf54l15_xxaa_application.ld" left="46" top="353" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="287" useTextEdit="1" path="Source/bm_storage_test.c" left="0" top="99" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="287" useTextEdit="1" path="Source/bm_storage_test.c" left="0" top="230" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/log.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="175" useTextEdit="1" path="Source/main.c" left="0" top="149" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="64" useTextEdit="1" path="C:/Program Files/SEGGER/SEGGER Embedded Studio 8.24/include/string.h" left="0" top="43" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="176" useTextEdit="1" path="Source/main.c" left="0" top="155" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="55" useTextEdit="1" path="C:/Program Files/SEGGER/SEGGER Embedded Studio 8.24/include/string.h" left="0" top="43" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="142" useTextEdit="1" path="Source/nrfx_glue.h" left="0" top="121" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/rtt/SEGGER_RTT.c" left="0" top="153" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="16" y="493" useTextEdit="1" path="Source/rtt/SEGGER_RTT_printf.c" left="0" top="462" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="21" useTextEdit="1" path="Source/dfu/bm_dfu_flash.c" left="0" top="15" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="98" useTextEdit="1" path="Source/dfu/nrf_dfu_flash.h" left="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="86" useTextEdit="1" path="Source/dfu/nrf_dfu.c" left="0" top="65" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="30" useTextEdit="1" path="Source/dfu/bm_dfu_flash.c" left="0" top="19" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="56" useTextEdit="1" path="Source/dfu/nrf_dfu_flash.h" left="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_handling_error.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/bm_buttons/bm_buttons.c" left="0" top="57" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="201" useTextEdit="1" path="Source/nrfx/hal/nrf_gpio.h" left="0" top="180" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="77" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_soc.c" left="0" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_validation.c" left="0" top="0" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

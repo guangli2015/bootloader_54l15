@@ -79,14 +79,14 @@
 #define UNUSED_RETURN_VALUE(X) UNUSED_VARIABLE(X)
 #define STORAGE0_START 0x0000b000
 #define STORAGE0_SIZE 0x146800
-
+#define SD_WRITE_BLOCK_SIZE 16
 
 
 /* Write buffer size must be a multiple of the program unit.
  * To support both RRAM (16 bytes) and SoftDevice (4 bytes) backends,
  * that is 16 bytes.
  */
-#define BUFFER_BLOCK_SIZE 20
+
 
 /* Forward declarations. */
 static void bm_storage_evt_handler(struct bm_storage_evt *evt);
@@ -517,7 +517,12 @@ static void on_data_obj_select_request(nrf_dfu_request_t * p_req, nrf_dfu_respon
                   p_res->select.max_size);
 }
 
-
+typedef struct 
+{
+  uint8_t buff[4096];
+  uint32_t offset;
+} data_recv_buffer_t;
+static data_recv_buffer_t data_recv_buffer;
 static void on_data_obj_create_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p_res)
 {
     NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_CREATE (data)");
@@ -566,6 +571,8 @@ static void on_data_obj_create_request(nrf_dfu_request_t * p_req, nrf_dfu_respon
         return;
     }
 #endif
+    data_recv_buffer.offset = 0;
+    memset(data_recv_buffer.buff,0, 4096);
     s_dfu_settings.progress.data_object_size      = p_req->create.object_size;
     s_dfu_settings.progress.firmware_image_crc    = s_dfu_settings.progress.firmware_image_crc_last;
     s_dfu_settings.progress.firmware_image_offset = s_dfu_settings.progress.firmware_image_offset_last;
@@ -617,12 +624,17 @@ static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
         crc32_compute(p_req->write.p_data, p_req->write.len, &s_dfu_settings.progress.firmware_image_crc);
 
     ASSERT(p_req->callback.write);
-
+    //NRF_LOG_DEBUG("\r\nW(data): %x %x\r\n",write_addr,p_req->write.len);
     ret_code_t ret = 0;
        // nrf_dfu_flash_store(write_addr, p_req->write.p_data, p_req->write.len, p_req->callback.write);
+       memcpy(data_recv_buffer.buff+data_recv_buffer.offset, p_req->write.p_data,  p_req->write.len);
+       data_recv_buffer.offset = data_recv_buffer.offset + p_req->write.len;
+       p_req->callback.write((void*)p_req->write.p_data);
+#if 0
     ret = bm_storage_write(&storage, write_addr, p_req->write.p_data, p_req->write.len,(void *)(p_req->callback.write));	
     if (ret != NRF_SUCCESS)
     {
+         NRF_LOG_DEBUG("bm_storage_write fail with %x\r\n",ret);
         /* When nrf_dfu_flash_store() fails because there is no space in the queue,
          * stop processing the request so that the peer can detect a CRC error
          * and retransmit this object. Remember to manually free the buffer !
@@ -630,7 +642,7 @@ static void on_data_obj_write_request(nrf_dfu_request_t * p_req, nrf_dfu_respons
         p_req->callback.write((void*)p_req->write.p_data);
         //return;
     }
-
+#endif
     /* Update the CRC of the firmware image. */
     s_dfu_settings.write_offset                   += p_req->write.len;
     s_dfu_settings.progress.firmware_image_offset += p_req->write.len;
@@ -662,14 +674,14 @@ static void on_data_obj_execute_request_sched(void * p_evt, uint16_t event_lengt
 
     ret_code_t          ret;
     nrf_dfu_request_t * p_req = (nrf_dfu_request_t *)(p_evt);
-#if 0
+#if 1
     /* Wait for all buffers to be written in flash. */
-    if (nrf_fstorage_is_busy(NULL))
-    {
+    if (bm_storage_is_busy(&storage))
+    { NRF_LOG_DEBUG("%");
         ret = app_sched_event_put(p_req, sizeof(nrf_dfu_request_t), on_data_obj_execute_request_sched);
         if (ret != NRF_SUCCESS)
         {
-            NRF_LOG_ERROR("Failed to schedule object execute: 0x%x.", ret);
+            NRF_LOG_ERROR("Failed to schedule object execute: 0x%x.\r\n", ret);
         }
         return;
     }
@@ -706,14 +718,14 @@ static void on_data_obj_execute_request_sched(void * p_evt, uint16_t event_lengt
 
     }
 
-    //NRF_LOG_DEBUG("Request handling complete. Result: 0x%x\r\n", res.result);
+    NRF_LOG_DEBUG("EXECUTE data handle ok\r\n", res.result);
 }
 
 
 static bool on_data_obj_execute_request(nrf_dfu_request_t * p_req, nrf_dfu_response_t * p_res)
 {
     NRF_LOG_DEBUG("Handle NRF_DFU_OP_OBJECT_EXECUTE (data)");
-
+    ret_code_t ret = 0;
     uint32_t const data_object_size = s_dfu_settings.progress.firmware_image_offset -
                                       s_dfu_settings.progress.firmware_image_offset_last;
 
@@ -725,6 +737,24 @@ static bool on_data_obj_execute_request(nrf_dfu_request_t * p_req, nrf_dfu_respo
                       data_object_size);
 
         p_res->result = NRF_DFU_RES_CODE_OPERATION_NOT_PERMITTED;
+        return true;
+    }
+    uint32_t const write_addr = m_firmware_start_addr + s_dfu_settings.write_offset-s_dfu_settings.progress.data_object_size;
+    if((data_recv_buffer.offset % SD_WRITE_BLOCK_SIZE) != 0)
+    {
+      data_recv_buffer.offset= data_recv_buffer.offset+(data_recv_buffer.offset % SD_WRITE_BLOCK_SIZE);
+    }
+    NRF_LOG_DEBUG("\r\nW(data): %x %x\r\n",write_addr,data_recv_buffer.offset);
+    ret = bm_storage_write(&storage, write_addr, data_recv_buffer.buff, data_recv_buffer.offset,(void *)(p_req->callback.write));	
+    if (ret != NRF_SUCCESS)
+    {
+         NRF_LOG_DEBUG("bm_storage_write fail with %x\r\n",ret);
+        /* When nrf_dfu_flash_store() fails because there is no space in the queue,
+         * stop processing the request so that the peer can detect a CRC error
+         * and retransmit this object. Remember to manually free the buffer !
+         */
+        //p_req->callback.write((void*)p_req->write.p_data);
+        p_res->result = NRF_DFU_RES_CODE_INVALID_OBJECT;
         return true;
     }
 
@@ -946,11 +976,18 @@ ret_code_t nrf_dfu_req_handler_init(nrf_dfu_observer_t observer)
 {
     ret_code_t       ret_val;
     nrf_dfu_result_t result;
-
+    uint32_t err;
     if (observer == NULL)
     {
         return NRF_ERROR_INVALID_PARAM;
     }
+      data_recv_buffer.offset = 0;
+
+      err = bm_storage_init(&storage);
+	if (err != NRF_SUCCESS) {
+		LOG_INF("bm_storage_init() failed, err %#x", err);
+		return err;
+	}
 #if 0
 #if defined(BLE_STACK_SUPPORT_REQD) || defined(ANT_STACK_SUPPORT_REQD)
     ret_val  = nrf_dfu_flash_init(true);

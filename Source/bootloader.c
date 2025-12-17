@@ -57,6 +57,8 @@
 #include <hal/nrf_clock.h>
 #include "app_scheduler.h"
 #include "nrf_dfu.h"
+#include <hal/nrf_gpio.h>
+#define BOARD_PIN_BTN_0 NRF_PIN_PORT_TO_PIN_NUMBER(13, 1)
 #define SCHED_QUEUE_SIZE      32          /**< Maximum number of events in the scheduler queue. */
 #define SCHED_EVENT_DATA_SIZE NRF_DFU_SCHED_EVENT_DATA_SIZE /**< Maximum app_scheduler event size. */
 
@@ -97,6 +99,7 @@ void app_error_handler_bare(uint32_t error_code)
 }
 bool ble_dfu_enter_check(void)
 {
+#if 0
     uint32_t err_code;
     uint32_t content;
     LOG_INF("In ble_dfu_buttonless_bootloader_start_finalize\r\n");
@@ -117,6 +120,15 @@ bool ble_dfu_enter_check(void)
     }
    
     return false;
+#endif
+ if ((nrf_gpio_pin_read(BOARD_PIN_BTN_0) == 0))
+    {
+        LOG_INF("DFU mode requested via button.\r\n");
+        return true;
+    }
+
+    return false;
+
 }
 
 
@@ -222,8 +234,8 @@ void bootloader_start(void)
 
 	LOG_INF("Bluetooth enabled\r\n");
  #endif  
-//dfu_enter_check =ble_dfu_enter_check();
-//  if(dfu_enter_check)
+dfu_enter_check =ble_dfu_enter_check();
+  if(dfu_enter_check)
   {
       LOG_INF("Bootloader: enter dfu mode \r\n", app_vector_table);
       scheduler_init();
@@ -242,7 +254,7 @@ void bootloader_start(void)
         }
  
   }
-#if 0
+#if 1
   else
   {
 #if 0

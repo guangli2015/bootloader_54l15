@@ -143,6 +143,7 @@ softdevice_irq_init();
   nrf_gpio_cfg_output(BOARD_PIN_LED_3);
    nrf_gpio_pin_toggle(BOARD_PIN_LED_2);
    nrf_gpio_pin_toggle(BOARD_PIN_LED_3);
+   nrf_gpio_cfg_input(BOARD_PIN_BTN_0,NRF_GPIO_PIN_PULLUP);
 #endif
  SEGGER_RTT_printf(0, "\n bootloader hello\n");
    //trigger_hardfault();

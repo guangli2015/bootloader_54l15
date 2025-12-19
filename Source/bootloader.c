@@ -99,10 +99,15 @@ void app_error_handler_bare(uint32_t error_code)
 }
 bool ble_dfu_enter_check(void)
 {
-#if 0
+
     uint32_t err_code;
     uint32_t content;
-    LOG_INF("In ble_dfu_buttonless_bootloader_start_finalize\r\n");
+    LOG_INF("In ble_dfu_enter_check\r\n");
+    if ((nrf_gpio_pin_read(BOARD_PIN_BTN_0) == 0))
+    {
+        LOG_INF("DFU mode requested via button.\r\n");
+        return true;
+    }
     err_code = sd_power_gpregret_get(0, &content);
     //VERIFY_SUCCESS(err_code);
      if (err_code != NRF_SUCCESS)                       \
@@ -119,14 +124,6 @@ bool ble_dfu_enter_check(void)
         return true;
     }
    
-    return false;
-#endif
- if ((nrf_gpio_pin_read(BOARD_PIN_BTN_0) == 0))
-    {
-        LOG_INF("DFU mode requested via button.\r\n");
-        return true;
-    }
-
     return false;
 
 }

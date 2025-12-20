@@ -103,7 +103,7 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="4" y="201" useTextEdit="1" path="Source/nrfx/hal/nrf_gpio.h" left="0" top="180" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="39" y="77" useTextEdit="1" path="Source/softdevice_handler/nrf_sdh_soc.c" left="0" top="54" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/dfu/nrf_dfu_validation.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/prj_config.h" left="0" selected="1" top="5" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/prj_config.h" left="0" selected="1" top="3" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="bootloader_54l15" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/work/bootloader_54l15/Source/dfu" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

@@ -102,7 +102,6 @@
       <file file_name="Source/scheduler/app_scheduler.c" />
     </folder>
     <folder Name="Setup">
-      <file file_name="Source/FreeRTOSConfig.h" />
       <file file_name="Setup/nrf54l15_xxaa_application.ld" />
       <file file_name="Source/nrfx_config_nrf54l15_application.h" />
       <file file_name="Source/prj_config.h" />

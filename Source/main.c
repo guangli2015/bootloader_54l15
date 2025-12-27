@@ -10,9 +10,7 @@ Purpose : Generic application start
 
 */
 /* FreeRTOS include. */
-#include "FreeRTOS.h"
-#include "task.h"
-#include "timers.h"
+
 /*#define NRFX_UARTE_ENABLED 1
 #define NRFX_UARTE30_ENABLED 1
 #define NRFX_UARTE00_ENABLED 1
@@ -68,43 +66,9 @@ Purpose : Generic application start
 #ifndef BOARD_PIN_BTN_0
 #define BOARD_PIN_BTN_0 NRF_PIN_PORT_TO_PIN_NUMBER(13, 1)
 #endif
+#define BOARD_PIN_BTN_1 NRF_PIN_PORT_TO_PIN_NUMBER(9, 1)
 
 
-void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName )
-{
-    /* Force an assert. */
-    configASSERT( pcTaskName == 0 );
-}
-
-static void led_toggle_task_function (void * pvParameter)
-{
-   
-    while (true)
-    {
-       // nrf_gpio_pin_write(BOARD_PIN_LED_0, 1);
-          nrf_gpio_pin_toggle(BOARD_PIN_LED_1);
-        /* Delay a task for a given number of ticks */
-        vTaskDelay(3000);
-
-        /* Tasks must be implemented to never return... */
-    }
-}
-static TaskHandle_t m_softdevice_init_task; 
-TaskHandle_t  led_toggle_task_handle;
-TimerHandle_t led_toggle_timer_handle;  /**< Reference to LED1 toggling FreeRTOS timer. */
-
-
-
-/**@brief The function to call when the LED1 FreeRTOS timer expires.
- *
- * @param[in] pvParameter   Pointer that will be used as the parameter for the timer.
- */
-static void led_toggle_timer_callback (TimerHandle_t xTimer )
-{
-   
-    nrf_gpio_pin_toggle(BOARD_PIN_LED_2);
-}
-StaticTimer_t myTimerBuffer;
 
 extern int sftdevice_test(void);
 extern int softdevice_irq_init(void);
@@ -144,6 +108,7 @@ softdevice_irq_init();
    nrf_gpio_pin_toggle(BOARD_PIN_LED_2);
    nrf_gpio_pin_toggle(BOARD_PIN_LED_3);
    nrf_gpio_cfg_input(BOARD_PIN_BTN_0,NRF_GPIO_PIN_PULLUP);
+     nrf_gpio_cfg_input(BOARD_PIN_BTN_1,NRF_GPIO_PIN_PULLUP);
 #endif
  SEGGER_RTT_printf(0, "\n bootloader hello\n");
    //trigger_hardfault();
@@ -272,7 +237,7 @@ static int sys_clock_driver_init(void)
 
   nrfx_grtc_clock_source_set(NRF_GRTC_CLKSEL_LFXO);
 
-  err_code = nrfx_grtc_init(configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY);
+  err_code = nrfx_grtc_init(5);
   if (err_code != NRFX_SUCCESS) {
 		return -1;
   }

@@ -59,10 +59,14 @@
 #include "nrf_dfu.h"
 #include <hal/nrf_gpio.h>
 #define BOARD_PIN_BTN_0 NRF_PIN_PORT_TO_PIN_NUMBER(13, 1)
+
+#define BOARD_PIN_BTN_1 NRF_PIN_PORT_TO_PIN_NUMBER(9, 1)
+
 #define SCHED_QUEUE_SIZE      32          /**< Maximum number of events in the scheduler queue. */
 #define SCHED_EVENT_DATA_SIZE NRF_DFU_SCHED_EVENT_DATA_SIZE /**< Maximum app_scheduler event size. */
 
 #define APP_START_ADDRESS 0x0000b000
+#define FIRMWARELOADER_START_ADDRESS 0x00151800
 #define BOOTLOADER_DFU_GPREGRET_MASK            (0xF8)      /**< Mask for GPGPREGRET bits used for the magic pattern written to GPREGRET register to signal between main app and DFU. */
 #define BOOTLOADER_DFU_GPREGRET                 (0xB0)      /**< Magic pattern written to GPREGRET register to signal between main app and DFU. The 3 lower bits are assumed to be used for signalling purposes.*/
 #define BOOTLOADER_DFU_START_BIT_MASK           (0x01)      /**< Bit mask to signal from main application to enter DFU mode using a buttonless service. */
@@ -97,7 +101,7 @@ void app_error_handler_bare(uint32_t error_code)
     LOG_INF("Received an error: 0x%08x!", error_code);
     on_error();
 }
-bool ble_dfu_enter_check(void)
+uint32_t ble_dfu_enter_check(void)
 {
 
     uint32_t err_code;
@@ -106,8 +110,15 @@ bool ble_dfu_enter_check(void)
     if ((nrf_gpio_pin_read(BOARD_PIN_BTN_0) == 0))
     {
         LOG_INF("DFU mode requested via button.\r\n");
-        return true;
+        return 1;
     }
+
+     if ((nrf_gpio_pin_read(BOARD_PIN_BTN_1) == 0))
+    {
+        LOG_INF("DFU mode requested via button.\r\n");
+        return 0;
+    }
+#if 0
     err_code = sd_power_gpregret_get(0, &content);
     //VERIFY_SUCCESS(err_code);
      if (err_code != NRF_SUCCESS)                       \
@@ -123,8 +134,8 @@ bool ble_dfu_enter_check(void)
         LOG_INF("DFU mode requested via GPREGRET.\r\n");
         return true;
     }
-   
-    return false;
+ #endif 
+    return 2;
 
 }
 
@@ -174,6 +185,7 @@ __STATIC_INLINE void jump_to_app(uint32_t vector_table_addr)
     __ISB();
 
     __set_MSP(vt->msp);
+      SCB->VTOR = (uint32_t)vector_table_addr;
 
     ((void (*)(void))vt->reset)();
 }
@@ -212,7 +224,8 @@ void bootloader_start(void)
 {
     int err;
     const uint32_t app_vector_table = APP_START_ADDRESS;
-    bool dfu_enter_check = false;
+    const uint32_t firmwareLoader_vector_table = FIRMWARELOADER_START_ADDRESS;
+    uint32_t dfu_enter_check = 0;
     uint32_t ret_val;
 #if 0
     err = nrf_sdh_enable_request();
@@ -232,7 +245,8 @@ void bootloader_start(void)
 	LOG_INF("Bluetooth enabled\r\n");
  #endif  
 dfu_enter_check =ble_dfu_enter_check();
-  if(dfu_enter_check)
+#if 1
+  if(dfu_enter_check == 1)
   {
       LOG_INF("Bootloader: enter dfu mode \r\n", app_vector_table);
       scheduler_init();
@@ -251,16 +265,19 @@ dfu_enter_check =ble_dfu_enter_check();
         }
  
   }
-#if 1
+#endif
+  else if(dfu_enter_check == 2)
+  {
+      LOG_INF("start firmwareloader at 0x%x\r\n", firmwareLoader_vector_table);
+
+    jump_to_app(firmwareLoader_vector_table);
+
+    while (1); // 不应该到这里
+    
+  }
   else
   {
-#if 0
-        err = nrf_sdh_disable_request();
-	if (err) {
-		LOG_INF("Failed to disable SoftDevice, err %d\r\n", err);
-		return;
-	}
-#endif
+
     LOG_INF("start application at 0x%x\r\n", app_vector_table);
 
     jump_to_app(app_vector_table);
@@ -268,7 +285,6 @@ dfu_enter_check =ble_dfu_enter_check();
     while (1); // 不应该到这里
 
   }
-#endif
 
 }
 

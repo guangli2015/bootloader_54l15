@@ -77,8 +77,8 @@
 #define UNUSED_VARIABLE(X)  ((void)(X))
 #define UNUSED_PARAMETER(X) UNUSED_VARIABLE(X)
 #define UNUSED_RETURN_VALUE(X) UNUSED_VARIABLE(X)
-#define STORAGE0_START 0x0000b000
-#define STORAGE0_SIZE 0x146800
+#define STORAGE0_START 0x00151800
+#define STORAGE0_SIZE 0x00010000
 #define SD_WRITE_BLOCK_SIZE 16
 
 
@@ -92,7 +92,7 @@
 static void bm_storage_evt_handler(struct bm_storage_evt *evt);
 //STATIC_ASSERT(DFU_SIGNED_COMMAND_SIZE <= INIT_COMMAND_MAX_SIZE);
 
-static uint32_t m_firmware_start_addr = 0xb000;          /**< Start address of the current firmware image. */
+static uint32_t m_firmware_start_addr = STORAGE0_START;          /**< Start address of the current firmware image. */
 static uint32_t m_firmware_size_req;            /**< The size of the entire firmware image. Defined by the init command. */
 
 static nrf_dfu_observer_t m_observer;
